@@ -1,0 +1,1582 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ *
+ * (c) Kitodo. Key to digital objects e. V. <contact@kitodo.org>
+ *
+ * This file is part of the Kitodo project.
+ *
+ * It is licensed under GNU General Public License version 3 or later.
+ *
+ * For the full copyright and license information, please read the
+ * GPL3-License.txt file that was distributed with this source code.
+ *
+-->
+<!-- Ruleset for the WLB crowdsourcing tool. Contains just one document type "Plakat" for initial project.
+     Header values in imported CSV file have to match metadata (e.g. "key") ID in this ruleset file in order to
+     use it with mass import feature. -->
+<ruleset xmlns="http://names.kitodo.org/ruleset/v2"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://names.kitodo.org/ruleset/v2 ruleset.xsd">
+    <declaration>
+        <!-- Dokument- bzw. Strukturtypen ("division") -->
+        <division id="Plakat"
+                  processTitle="media_type+'_'+Signatur">
+            <label lang="de">Plakat</label>
+            <label lang="en">Poster</label>
+        </division>
+        <!-- Metadaten ("key") -->
+        <key id="media_type"
+             use="docType">
+            <label lang="de">Art des Inhalts</label>
+            <label lang="en">Type of content</label>
+        </key>
+        <!-- Wert wird von Inventarisierungsliste importiert -->
+        <key id="Signatur">
+            <label lang="de">Signatur</label>
+            <label lang="en">Signature</label>
+        </key>
+        <!-- Interne Signatur ohne Leerzeichen, die u. a. zur Generierung valider URLs und URNs genutzt wird -->
+        <key id="Signatur_intern">
+            <label lang="de">Signatur (Intern)</label>
+            <label lang="en">Signature (Intern)</label>
+        </key>
+        <!-- ISIL Signatur - wird zum Re-Import von Datensätzen vom K10+ über das URL-Suchfeld 'pica.prp' benötigt -->
+        <key id="ISIL_Signatur"
+             use="recordIdentifier">
+            <label lang="de">ISIL Signatur</label>
+            <label lang="en">ISIL Signature</label>
+        </key>
+        <key id="Volltext">
+            <label lang="de">Volltext</label>
+            <label lang="en">Fulltext</label>
+        </key>
+        <key id="Zugriffslizenz">
+            <label lang="de">Zugriffslizenz</label>
+            <label lang="en">License</label>
+            <option value="https://creativecommons.org/publicdomain/mark/1.0/">
+                <label lang="de">Public Domain Mark 1.0</label>
+            </option>
+            <option value="http://digital.wlb-stuttgart.de/lizenzen/rv-fz/1.0/">
+                <label lang="de">Rechte vorbehalten - Freier Zugang</label>
+            </option>
+            <option value="http://digital.wlb-stuttgart.de/lizenzen/rv-fz-andere/1.0/">
+                <label lang="de">Rechte vorbehalten - Freier Zugang - Andere rechtliche Beschränkungen</label>
+            </option>
+            <option value="http://rightsstatements.org/vocab/InC/1.0/">
+                <label lang="de">Urheberrechtsschutz - Kein freier Zugang</label>
+            </option>
+            <preset>http://digital.wlb-stuttgart.de/lizenzen/rv-fz/1.0/</preset>
+        </key>
+        <key id="DigitaleKollektion">
+            <label lang="de">Digitale Kollektionen</label>
+            <label lang="en">Digital collections</label>
+            <option value="proteste">
+                <label lang="de">Proteste</label>
+            </option>
+            <option value="protesteplakatehill">
+                <label lang="de">Proteste Plakate Hill</label>
+            </option>
+            <preset>proteste</preset>
+            <preset>protesteplakatehill</preset>
+        </key>
+        <key id="0100">
+            <label lang="de">PPN</label>
+            <label lang="en">PPN</label>
+        </key>
+        <!-- Metadatum mit Default-Wert, der in der Regel nicht geändert und nicht vom Crowdsourcing-Tool ausgelesen bzw. berücksichtigt werden muss -->
+        <key id="0500">
+            <label lang="de">Status</label>
+            <label lang="en">Status</label>
+            <preset>Oay</preset>
+        </key>
+        <!-- Metadatum mit Default-Wert, der in der Regel nicht geändert und nicht vom Crowdsourcing-Tool ausgelesen bzw. berücksichtigt werden muss -->
+        <key id="0501_1">
+            <label lang="de">Unbewegtes Bild</label>
+            <label lang="en">Still image</label>
+            <preset>unbewegtes Bild$bsti</preset>
+        </key>
+        <key id="0501_2">
+            <label lang="de">Text vorhanden</label>
+            <label lang="en">With text</label>
+            <option value="true">
+                <label lang="de">Ja</label>
+                <label lang="en">Yes</label>
+            </option>
+            <option value="false">
+                <label lang="de">Nein</label>
+                <label lang="en">No</label>
+            </option>
+            <!-- NOTE: preset for boolean metadata bugged, see https://github.com/kitodo/kitodo-production/issues/5689 -->
+            <preset>true</preset>
+        </key>
+        <!-- Metadatum mit Default-Wert, der in der Regel nicht geändert und nicht vom Crowdsourcing-Tool ausgelesen bzw. berücksichtigt werden muss -->
+        <key id="0502">
+            <label lang="de">Medientyp</label>
+            <label lang="en">Type of media</label>
+            <preset>Computermedien$bc</preset>
+        </key>
+        <!-- Metadatum mit Default-Wert, der in der Regel nicht geändert und nicht vom Crowdsourcing-Tool ausgelesen bzw. berücksichtigt werden muss -->
+        <key id="0503">
+            <label lang="de">Datenträgertyp</label>
+            <label lang="en">Data media type</label>
+            <preset>Online-Ressource$bcr</preset>
+        </key>
+        <!-- Eltern-Feld "0599" ("Selektionscode") und Geschwisterfelder "0599_1" und "0599_2" werden beim Export nach Presentation auf statische Werte gesetzt -->
+        <key id="0599_3">
+            <label lang="de">Rückseite ist bedruckt</label>
+            <label lang="en">Poster is printed on reverse side</label>
+            <option value="true">
+                <label lang="de">Ja</label>
+                <label lang="en">Yes</label>
+            </option>
+            <option value="false">
+                <label lang="de">Nein</label>
+                <label lang="en">No</label>
+            </option>
+            <!-- NOTE: preset for boolean metadata bugged, see https://github.com/kitodo/kitodo-production/issues/5689 -->
+            <preset>false</preset>
+        </key>
+
+        <!-- Entstehungsdatum (aufgeteilt in "Start" (1100_1) und "Ende" (1100_2), um ggf. Zeitraum abbilden zu können -->
+        <!-- Entstehungsdatum - Start (1100_1): mit Unterfeldern für Jahr und "ca.", "vor" und "nach" um ungenaue Daten abbilden zu können -->
+        <key id="1100_1">
+            <label lang="de">Entstehungsjahr</label>
+            <label lang="en">Year of origin</label>
+            <key id="1100_1_1">
+                <label lang="de">Jahr</label>
+                <label lang="en">Year</label>
+            </key>
+            <key id="1100_1_2">
+                <label lang="de">ca.</label>
+                <label lang="en">ca.</label>
+                <!--<codomain type="boolean"/>-->
+                <option value="true"/>
+                <option value="false"/>
+                <!-- NOTE: preset for boolean metadata bugged, see https://github.com/kitodo/kitodo-production/issues/5689 -->
+                <preset>false</preset>
+            </key>
+            <key id="1100_1_3">
+                <label lang="de">vor</label>
+                <label lang="en">before</label>
+                <!-- <codomain type="boolean"/> -->
+                <option value="true"/>
+                <option value="false"/>
+                <!-- NOTE: preset for boolean metadata bugged, see https://github.com/kitodo/kitodo-production/issues/5689 -->
+                <preset>false</preset>
+            </key>
+            <key id="1100_1_4">
+                <label lang="de">nach</label>
+                <label lang="en">after</label>
+                <!-- <codomain type="boolean"/> -->
+                <option value="true"/>
+                <option value="false"/>
+                <!-- NOTE: preset for boolean metadata bugged, see https://github.com/kitodo/kitodo-production/issues/5689 -->
+                <preset>false</preset>
+            </key>
+        </key>
+        <!-- Entstehungsdatum - Ende (1100_2): mit Unterfeld für Jahr -->
+        <key id="1100_2">
+            <label lang="de">Ende eines Entstehungszeitraums</label>
+            <label lang="en">End of a period of origin</label>
+            <key id="1100_2_1">
+                <label lang="de">Jahr</label>
+                <label lang="en">Year</label>
+            </key>
+        </key>
+        <!-- bei Export start_date_year auf 1100_1 abbilden -->
+        <!--
+        <key id="1100_1">
+            <label lang="de">Erscheinungsjahr Sortierform</label>
+            <label lang="en">Creation year sorting</label>
+        </key>
+        -->
+
+        <!-- Metadatum mit Default-Wert, der in der Regel nicht geändert und nicht vom Crowdsourcing-Tool ausgelesen bzw. berücksichtigt werden muss -->
+        <key id="1101">
+            <label lang="de">Materialspezifische Codes</label>
+            <label lang="en">Material specific Codes</label>
+            <preset>crxun ---uuaua</preset>
+        </key>
+        <key id="1108">
+            <label lang="de">Copyrightjahr</label>
+            <label lang="en">Copyright year</label>
+            <pattern>\d{4}</pattern>
+        </key>
+        <!-- Metadatum mit Default-Wert, der in der Regel nicht geändert und nicht vom Crowdsourcing-Tool ausgelesen bzw. berücksichtigt werden muss -->
+
+        <key id="1131">
+            <label lang="de">Inhalt</label>
+            <label lang="en">Content</label>
+            <preset>!104141603!</preset>
+        </key>
+        <!-- Metadatum mit Default-Wert, der in der Regel nicht geändert und nicht vom Crowdsourcing-Tool ausgelesen bzw. berücksichtigt werden muss -->
+        <key id="1140">
+            <label lang="de">Veröffentlichungsart</label>
+            <label lang="de">Publication type</label>
+            <preset>bild</preset>
+        </key>
+        <key id="1500">
+            <label lang="de">Sprache(n)</label>
+            <label lang="en">Language(s)</label>
+            <!-- NOTE: using a "codomain" for "iso649-2" leads to multiple occurrences of metadata being written to
+                       the same metadata row in mass import which leads to an "IllegalStateException"
+                       therefore, all available options are added explicitly here -->
+            <!-- <codomain namespace="http://id.loc.gov/vocabulary/iso639-2/"/> -->
+            <option value="ach">
+                <label lang="de">Acholi</label>
+                <label lang="en">Acoli</label>
+            </option>
+            <option value="afr">
+                <label lang="de">Afrikaans</label>
+                <label lang="en">Afrikaans</label>
+            </option>
+            <option value="alb">
+                <label lang="de">Albanisch</label>
+                <label lang="en">Albanian</label>
+            </option>
+            <option value="amh">
+                <label lang="de">Amharisch</label>
+                <label lang="en">Amharic</label>
+            </option>
+            <option value="ara">
+                <label lang="de">Arabisch</label>
+                <label lang="en">Arabic</label>
+            </option>
+            <option value="bnt">
+                <label lang="de">Bantusprachen</label>
+                <label lang="en">Bantu languages</label>
+            </option>
+            <option value="baq">
+                <label lang="de">Baskisch</label>
+                <label lang="en">Basque</label>
+            </option>
+            <option value="ben">
+                <label lang="de">Bengali</label>
+                <label lang="en">Bengali</label>
+            </option>
+            <option value="bur">
+                <label lang="de">Birmanisch</label>
+                <label lang="en">Burmese</label>
+            </option>
+            <option value="bos">
+                <label lang="de">Bosnisch</label>
+                <label lang="en">Bosnian</label>
+            </option>
+            <option value="bul">
+                <label lang="de">Bulgarisch</label>
+                <label lang="en">Bulgarian</label>
+            </option>
+            <option value="chi">
+                <label lang="de">Chinesisch</label>
+                <label lang="en">Chinese</label>
+            </option>
+            <option value="dan">
+                <label lang="de">Dänisch</label>
+                <label lang="en">Danish</label>
+            </option>
+            <option value="ger">
+                <label lang="de">Deutsch</label>
+                <label lang="en">German</label>
+            </option>
+            <option value="eng">
+                <label lang="de">Englisch</label>
+                <label lang="en">English</label>
+            </option>
+            <option value="epo">
+                <label lang="de">Esperanto</label>
+                <label lang="en">Esperanto</label>
+            </option>
+            <option value="fin">
+                <label lang="de">Finnisch</label>
+                <label lang="en">Finnish</label>
+            </option>
+            <option value="fre">
+                <label lang="de">Französisch</label>
+                <label lang="en">French</label>
+            </option>
+            <option value="glg">
+                <label lang="de">Galicisch</label>
+                <label lang="en">Galician</label>
+            </option>
+            <option value="orm">
+                <label lang="de">Galla</label>
+                <label lang="en">Oromo</label>
+            </option>
+            <option value="lug">
+                <label lang="de">Ganda</label>
+                <label lang="en">Ganda</label>
+            </option>
+            <option value="gre">
+                <label lang="de">Griechisch</label>
+                <label lang="en">Greek Modern</label>
+            </option>
+            <option value="hau">
+                <label lang="de">Haussa</label>
+                <label lang="en">Hausa</label>
+            </option>
+            <option value="heb">
+                <label lang="de">Hebräisch</label>
+                <label lang="en">Hebrew</label>
+            </option>
+            <option value="hin">
+                <label lang="de">Hindi</label>
+                <label lang="en">Hindi</label>
+            </option>
+            <option value="gle">
+                <label lang="de">Irisch</label>
+                <label lang="en">Irish</label>
+            </option>
+            <option value="ice">
+                <label lang="de">Isländisch</label>
+                <label lang="en">Icelandic</label>
+            </option>
+            <option value="ita">
+                <label lang="de">Italienisch</label>
+                <label lang="en">Italian</label>
+            </option>
+            <option value="jpn">
+                <label lang="de">Japanisch</label>
+                <label lang="en">Japanese</label>
+            </option>
+            <option value="/khm">
+                <label lang="de">Kambodschanisch</label>
+                <label lang="en">Central Khmer</label>
+            </option>
+            <option value="cat">
+                <label lang="de">Katalanisch</label>
+                <label lang="en">Catalan</label>
+            </option>
+            <option value="kor">
+                <label lang="de">Koreanisch</label>
+                <label lang="en">Korean</label>
+            </option>
+            <option value="hrv">
+                <label lang="de">Kroatisch</label>
+                <label lang="en">Croatian</label>
+            </option>
+            <option value="kur">
+                <label lang="de">Kurdisch</label>
+                <label lang="en">Kurdish</label>
+            </option>
+            <option value="ltz">
+                <label lang="de">Luxemburgisch</label>
+                <label lang="en">Luxembourgish</label>
+            </option>
+            <option value="may">
+                <label lang="de">Malaiisch</label>
+                <label lang="en">Malay</label>
+            </option>
+            <option value="mlt">
+                <label lang="de">Maltesisch</label>
+                <label lang="en">Maltese</label>
+            </option>
+            <option value="nep">
+                <label lang="de">Nepali</label>
+                <label lang="en">Nepali</label>
+            </option>
+            <option value="dut">
+                <label lang="de">Niederländisch</label>
+                <label lang="en">Dutch</label>
+            </option>
+            <option value="nor">
+                <label lang="de">Norwegisch</label>
+                <label lang="en">Norwegian</label>
+            </option>
+            <option value="ori">
+                <label lang="de">Oriya</label>
+                <label lang="en">Oriya</label>
+            </option>
+            <option value="pus">
+                <label lang="de">Paschtu</label>
+                <label lang="en">Pushto</label>
+            </option>
+            <option value="nso">
+                <label lang="de">Pedi-Sprache (=Sotho Sprachen, Nord)</label>
+                <label lang="en">Pedi, Sepedi, Northern Sotho</label>
+            </option>
+            <option value="per">
+                <label lang="de">Persisch</label>
+                <label lang="en">Persian</label>
+            </option>
+            <option value="pol">
+                <label lang="de">Polnisch</label>
+                <label lang="en">Polish</label>
+            </option>
+            <option value="por">
+                <label lang="de">Portugiesisch</label>
+                <label lang="en">Portuguese</label>
+            </option>
+            <option value="rum">
+                <label lang="de">Rumänisch</label>
+                <label lang="en">Romanian</label>
+            </option>
+            <option value="rus">
+                <label lang="de">Russisch</label>
+                <label lang="en">Russian</label>
+            </option>
+            <option value="swe">
+                <label lang="de">Schwedisch</label>
+                <label lang="en">Swedish</label>
+            </option>
+            <option value="sin">
+                <label lang="de">Singhalesisch</label>
+                <label lang="en">Sinhala</label>
+            </option>
+            <option value="slo">
+                <label lang="de">Slowakisch</label>
+                <label lang="en">Slovak</label>
+            </option>
+            <option value="slv">
+                <label lang="de">Slowenisch</label>
+                <label lang="en">Slovenian</label>
+            </option>
+            <option value="wen">
+                <label lang="de">Sorbisch</label>
+                <label lang="en">Sorbian</label>
+            </option>
+            <option value="spa">
+                <label lang="de">Spanisch</label>
+                <label lang="en">Spanish</label>
+            </option>
+            <option value="swa">
+                <label lang="de">Suaheli (=Swahili)</label>
+                <label lang="en">Swahili</label>
+            </option>
+            <option value="tam">
+                <label lang="de">Tamil</label>
+                <label lang="en">Tamil</label>
+            </option>
+            <option value="tel">
+                <label lang="de">Telugu</label>
+                <label lang="en">Telugu</label>
+            </option>
+            <option value="tgl">
+                <label lang="de">Tagalog</label>
+                <label lang="en">Tagalog</label>
+            </option>
+            <option value="tha">
+                <label lang="de">Thailändisch</label>
+                <label lang="en">Thai</label>
+            </option>
+            <option value="cze">
+                <label lang="de">Tschechisch</label>
+                <label lang="en">Czech</label>
+            </option>
+            <option value="tso">
+                <label lang="de">Tsonga</label>
+                <label lang="en">Tsonga</label>
+            </option>
+            <option value="tur">
+                <label lang="de">Türkisch</label>
+                <label lang="en">Turkish</label>
+            </option>
+            <option value="ukr">
+                <label lang="de">Ukrainisch</label>
+                <label lang="en">Ukrainian</label>
+            </option>
+            <option value="hun">
+                <label lang="de">Ungarisch</label>
+                <label lang="en">Hungarian</label>
+            </option>
+            <option value="urd">
+                <label lang="de">Urdu</label>
+                <label lang="en">Urdu</label>
+            </option>
+            <option value="vie">
+                <label lang="de">Vietnamesisch</label>
+                <label lang="en">Vietnamese</label>
+            </option>
+            <option value="wel">
+                <label lang="de">Walisisch</label>
+                <label lang="en">Welsh</label>
+            </option>
+            <option value="und">
+                <label lang="de">Unbestimmbare Sprache</label>
+                <label lang="en">Undetermined</label>
+            </option>
+            <option value="zxx">
+                <label lang="de">Kein sprachlicher Inhalt</label>
+                <label lang="en">No linguistic content</label>
+            </option>
+        </key>
+        <key id="1700">
+            <label lang="de">Erscheinungsland</label>
+            <label lang="en">Country of origin</label>
+            <option value="XC-EG">
+                <label lang="de">Ägypten</label>
+                <label lang="en">Egypt</label>
+            </option>
+            <option value="XC-ET">
+                <label lang="de">Äthiopien</label>
+                <label lang="en">Ethiopia</label>
+            </option>
+            <option value="XB-AF">
+                <label lang="de">Afghanistan</label>
+                <label lang="en">Afghanistan</label>
+            </option>
+            <option value="XA-AL">
+                <label lang="de">Albanien</label>
+                <label lang="en">Albania</label>
+            </option>
+            <option value="XC-DZ">
+                <label lang="de">Algerien</label>
+                <label lang="en">Algeria</label>
+            </option>
+            <option value="XC-AO">
+                <label lang="de">Angola</label>
+                <label lang="en">Angola</label>
+            </option>
+            <option value="XD-AR">
+                <label lang="de">Argentinien</label>
+                <label lang="en">Argentina</label>
+            </option>
+            <option value="XE-AU">
+                <label lang="de">Australien</label>
+                <label lang="en">Australia</label>
+            </option>
+            <option value="XD-BS">
+                <label lang="de">Bahamas</label>
+                <label lang="en">Bahamas</label>
+            </option>
+            <option value="XB-BD">
+                <label lang="de">Bangladesch</label>
+                <label lang="en">Bangladesh</label>
+            </option>
+            <option value="XA-BY">
+                <label lang="de">Belarus</label>
+                <label lang="en">Belarus</label>
+            </option>
+            <option value="XA-BE">
+                <label lang="de">Belgien</label>
+                <label lang="en">Belgium</label>
+            </option>
+            <option value="XB-BUMM">
+                <label lang="de">Birma (-1989)</label>
+                <label lang="en">Burma (-1989)</label>
+            </option>
+            <option value="XD-BO">
+                <label lang="de">Bolivien</label>
+                <label lang="en">Bolivia</label>
+            </option>
+            <option value="XA-BA">
+                <label lang="de">Bosnien und Herzegowina</label>
+                <label lang="en">Bosnia and Herzegovina</label>
+            </option>
+            <option value="XC-BW">
+                <label lang="de">Botswana</label>
+                <label lang="en">Botswana</label>
+            </option>
+            <option value="XD-BR">
+                <label lang="de">Brasilien</label>
+                <label lang="en">Brazil</label>
+            </option>
+            <option value="XA-BG">
+                <label lang="de">Bulgarien</label>
+                <label lang="en">Bulgaria</label>
+            </option>
+            <option value="XC-BF">
+                <label lang="de">Burkina Faso</label>
+                <label lang="en">Burkina Faso</label>
+            </option>
+            <option value="XC-BI">
+                <label lang="de">Burundi</label>
+                <label lang="en">Burundi</label>
+            </option>
+            <option value="XD-CL">
+                <label lang="de">Chile</label>
+                <label lang="en">Chile</label>
+            </option>
+            <option value="XB-CN">
+                <label lang="de">China</label>
+                <label lang="en">China</label>
+            </option>
+            <option value="XD-CR">
+                <label lang="de">Costa Rica</label>
+                <label lang="en">Costa Rica</label>
+            </option>
+            <option value="XA-DK">
+                <label lang="de">Dänemark</label>
+                <label lang="en">Denmark</label>
+            </option>
+            <option value="XA-DDDE">
+                <label lang="de">Deutsche Demokratische Republik (-1990)</label>
+                <label lang="en">German Democratic Republic (-1990)</label>
+            </option>
+            <option value="XA-DE">
+                <label lang="de">Deutschland</label>
+                <label lang="en">Germany</label>
+            </option>
+            <option value="XD-DO">
+                <label lang="de">Dominikanische Republik</label>
+                <label lang="en">Dominican Republic</label>
+            </option>
+            <option value="XC-DJ">
+                <label lang="de">Dschibuti</label>
+                <label lang="en">Djibouti</label>
+            </option>
+            <option value="XD-EC">
+                <label lang="de">Ecuador</label>
+                <label lang="en">Ecuador</label>
+            </option>
+            <option value="XD-SV">
+                <label lang="de">El Salvador</label>
+                <label lang="en">El Salvador</label>
+            </option>
+            <option value="XA-EE">
+                <label lang="de">Estland</label>
+                <label lang="en">Estonia</label>
+            </option>
+            <option value="XE-FJ">
+                <label lang="de">Fidschi</label>
+                <label lang="en">Fiji</label>
+            </option>
+            <option value="XA-FI">
+                <label lang="de">Finnland</label>
+                <label lang="en">Finland</label>
+            </option>
+            <option value="XA-FR">
+                <label lang="de">Frankreich</label>
+                <label lang="en">France</label>
+            </option>
+            <option value="XE-PF">
+                <label lang="de">Französisch-Polynesien</label>
+                <label lang="en">French Polynesia</label>
+            </option>
+            <option value="XA-GR">
+                <label lang="de">Griechenland</label>
+                <label lang="en">Greece</label>
+            </option>
+            <option value="XK-GL">
+                <label lang="de">Grönland</label>
+                <label lang="en">Greenland</label>
+            </option>
+            <option value="XA-GB">
+                <label lang="de">Großbritannien und Nordirland (Vereinigtes Königreich)</label>
+                <label lang="en">United Kingdom of Great Britain and Northern Ireland</label>
+            </option>
+            <option value="XD-GT">
+                <label lang="de">Guatemala</label>
+                <label lang="en">Guatemala</label>
+            </option>
+            <option value="XC-GW">
+                <label lang="de">Guinea-Bissau</label>
+                <label lang="en">Guinea-Bissau</label>
+            </option>
+            <option value="XD-HT">
+                <label lang="de">Haiti</label>
+                <label lang="en">Haiti</label>
+            </option>
+            <option value="XD-HN">
+                <label lang="de">Honduras</label>
+                <label lang="en">Honduras</label>
+            </option>
+            <option value="XB-HK">
+                <label lang="de">Hongkong</label>
+                <label lang="en">Hong Kong</label>
+            </option>
+            <option value="XB-IN">
+                <label lang="de">Indien</label>
+                <label lang="en">India</label>
+            </option>
+            <option value="XB-ID">
+                <label lang="de">Indonesien</label>
+                <label lang="en">Indonesia</label>
+            </option>
+            <option value="XB-IQ">
+                <label lang="de">Irak</label>
+                <label lang="en">Iraq</label>
+            </option>
+            <option value="XB-IR">
+                <label lang="de">Iran</label>
+                <label lang="en">Iran</label>
+            </option>
+            <option value="XA-IE">
+                <label lang="de">Irland</label>
+                <label lang="en">Ireland</label>
+            </option>
+            <option value="XA-IS">
+                <label lang="de">Island</label>
+                <label lang="en">Iceland</label>
+            </option>
+            <option value="XB-IL">
+                <label lang="de">Israel</label>
+                <label lang="en">Israel</label>
+            </option>
+            <option value="XA-IT">
+                <label lang="de">Italien</label>
+                <label lang="en">Italy</label>
+            </option>
+            <option value="XD-JM">
+                <label lang="de">Jamaika</label>
+                <label lang="en">Jamaica</label>
+            </option>
+            <option value="XB-JP">
+                <label lang="de">Japan</label>
+                <label lang="en">Japan</label>
+            </option>
+            <option value="XB-JO">
+                <label lang="de">Jordanien</label>
+                <label lang="en">Jordan</label>
+            </option>
+            <option value="XA-YUCS">
+                <label lang="de">Jugoslawien (-2003)</label>
+                <label lang="en">Yugoslavia (-2003)</label>
+            </option>
+            <option value="XB-KH">
+                <label lang="de">Kambodscha</label>
+                <label lang="en">Cambodia</label>
+            </option>
+            <option value="XC-CM">
+                <label lang="de">Kamerun</label>
+                <label lang="en">Cameroon</label>
+            </option>
+            <option value="XD-CA">
+                <label lang="de">Kanada</label>
+                <label lang="en">Canada</label>
+            </option>
+            <option value="XC-KE">
+                <label lang="de">Kenia</label>
+                <label lang="en">Kenya</label>
+            </option>
+            <option value="XD-CO">
+                <label lang="de">Kolumbien</label>
+                <label lang="en">Colombia</label>
+            </option>
+            <option value="XC-CG">
+                <label lang="de">Kongo</label>
+                <label lang="en">Congo</label>
+            </option>
+            <option value="XB-KP">
+                <label lang="de">Korea (Nordkorea)</label>
+                <label lang="en">North Korea</label>
+            </option>
+            <option value="XB-KR">
+                <label lang="de">Korea (Südkorea)</label>
+                <label lang="en">South Korea</label>
+            </option>
+            <option value="XA-HR">
+                <label lang="de">Kroatien</label>
+                <label lang="en">Croatia</label>
+            </option>
+            <option value="XD-CU">
+                <label lang="de">Kuba</label>
+                <label lang="en">Cuba</label>
+            </option>
+            <option value="XB-KW">
+                <label lang="de">Kuwait</label>
+                <label lang="en">Kuwait</label>
+            </option>
+            <option value="XB-LB">
+                <label lang="de">Libanon</label>
+                <label lang="en">Lebanon</label>
+            </option>
+            <option value="XA-LT">
+                <label lang="de">Litauen</label>
+                <label lang="en">Lithuania</label>
+            </option>
+            <option value="XA-LU">
+                <label lang="de">Luxemburg</label>
+                <label lang="en">Luxembourg</label>
+            </option>
+            <option value="XB-MY">
+                <label lang="de">Malaysia</label>
+                <label lang="en">Malaysia</label>
+            </option>
+            <option value="XC-ML">
+                <label lang="de">Mali</label>
+                <label lang="en">Mali</label>
+            </option>
+            <option value="XA-MT">
+                <label lang="de">Malta</label>
+                <label lang="en">Malta</label>
+            </option>
+            <option value="XC-MA">
+                <label lang="de">Marokko</label>
+                <label lang="en">Marocco</label>
+            </option>
+            <option value="XC-MU">
+                <label lang="de">Mauritius</label>
+                <label lang="en">Mauritius</label>
+            </option>
+            <option value="XD-MX">
+                <label lang="de">Mexiko</label>
+                <label lang="en">Mexico</label>
+            </option>
+            <option value="XC-MZ">
+                <label lang="de">Mosambik</label>
+                <label lang="en">Mozambique</label>
+            </option>
+            <option value="XB-MM">
+                <label lang="de">Myanmar</label>
+                <label lang="en">Myanmar</label>
+            </option>
+            <option value="XC-NA">
+                <label lang="de">Namibia</label>
+                <label lang="en">Namibia</label>
+            </option>
+            <option value="XB-NP">
+                <label lang="de">Nepal</label>
+                <label lang="en">Nepal</label>
+            </option>
+            <option value="XE-NZ">
+                <label lang="de">Neuseeland</label>
+                <label lang="en">New Zealand</label>
+            </option>
+            <option value="XD-NI">
+                <label lang="de">Nicaragua</label>
+                <label lang="en">Nicaragua</label>
+            </option>
+            <option value="XA-NL">
+                <label lang="de">Niederlande</label>
+                <label lang="en">Netherlands</label>
+            </option>
+            <option value="XC-NE">
+                <label lang="de">Niger</label>
+                <label lang="en">Niger</label>
+            </option>
+            <option value="XC-NG">
+                <label lang="de">Nigeria</label>
+                <label lang="en">Nigeria</label>
+            </option>
+            <option value="XA-NO">
+                <label lang="de">Norwegen</label>
+                <label lang="en">Norway</label>
+            </option>
+            <option value="XA-AT">
+                <label lang="de">Österreich</label>
+                <label lang="en">Austria</label>
+            </option>
+            <option value="XB-OM">
+                <label lang="de">Oman</label>
+                <label lang="en">Oman</label>
+            </option>
+            <option value="XB-PK">
+                <label lang="de">Pakistan</label>
+                <label lang="en">Pakistan</label>
+            </option>
+            <option value="XW">
+                <label lang="de">Palästina</label>
+                <label lang="en">Palestine</label>
+            </option>
+            <option value="XD-PA">
+                <label lang="de">Panama</label>
+                <label lang="en">Panama</label>
+            </option>
+            <option value="XD-PE">
+                <label lang="de">Peru</label>
+                <label lang="en">Peru</label>
+            </option>
+            <option value="XB-PH">
+                <label lang="de">Philippinen</label>
+                <label lang="en">Philippines</label>
+            </option>
+            <option value="XA-PL">
+                <label lang="de">Polen</label>
+                <label lang="en">Poland</label>
+            </option>
+            <option value="XA-PT">
+                <label lang="de">Portugal</label>
+                <label lang="en">Portugal</label>
+            </option>
+            <option value="XC-RW">
+                <label lang="de">Ruanda</label>
+                <label lang="en">Rwanda</label>
+            </option>
+            <option value="XA-RO">
+                <label lang="de">Rumänien</label>
+                <label lang="en">Romania</label>
+            </option>
+            <option value="XA-RU">
+                <label lang="de">Russland</label>
+                <label lang="en">Russia</label>
+            </option>
+            <option value="XE-SB">
+                <label lang="de">Salomonen</label>
+                <label lang="en">Solomon Islands</label>
+            </option>
+            <option value="XC-ZM">
+                <label lang="de">Sambia</label>
+                <label lang="en">Sambia</label>
+            </option>
+            <option value="XA-SM">
+                <label lang="de">San Marino</label>
+                <label lang="en">San Marino</label>
+            </option>
+            <option value="XA-SE">
+                <label lang="de">Schweden</label>
+                <label lang="en">Sweden</label>
+            </option>
+            <option value="XA-CH">
+                <label lang="de">Schweiz</label>
+                <label lang="en">Switzerland</label>
+            </option>
+            <option value="XC-SN">
+                <label lang="de">Senegal</label>
+                <label lang="en">Senegal</label>
+            </option>
+            <option value="XA-RS">
+                <label lang="de">Serbien</label>
+                <label lang="en">Serbia</label>
+            </option>
+            <option value="XC-SL">
+                <label lang="de">Sierra Leone</label>
+                <label lang="en">Sierra Leone</label>
+            </option>
+            <option value="XC-ZW">
+                <label lang="de">Simbabwe</label>
+                <label lang="en">Zimbabwe</label>
+            </option>
+            <option value="XA-SK">
+                <label lang="de">Slowakei</label>
+                <label lang="en">Slovakia</label>
+            </option>
+            <option value="XA-SI">
+                <label lang="de">Slowenien</label>
+                <label lang="en">Slovenia</label>
+            </option>
+            <option value="XC-SO">
+                <label lang="de">Somalia</label>
+                <label lang="en">Somalia</label>
+            </option>
+            <option value="XA-SUHH">
+                <label lang="de">Sowjetunion (-1992)</label>
+                <label lang="en">Soviet Union (-1992)</label>
+            </option>
+            <option value="XA-ES">
+                <label lang="de">Spanien</label>
+                <label lang="en">Spain</label>
+            </option>
+            <option value="XB-LK">
+                <label lang="de">Sri Lanka</label>
+                <label lang="en">Sri Lanka</label>
+            </option>
+            <option value="XD-KN">
+                <label lang="de">St. Kitts und Nevis</label>
+                <label lang="en">Saint Kitts and Nevis</label>
+            </option>
+            <option value="XC-SD">
+                <label lang="de">Sudan</label>
+                <label lang="en">Sudan</label>
+            </option>
+            <option value="XC-ZA">
+                <label lang="de">Südafrika</label>
+                <label lang="en">South Africa</label>
+            </option>
+            <option value="XD-SR">
+                <label lang="de">Surinam</label>
+                <label lang="en">Suriname</label>
+            </option>
+            <option value="XB-SY">
+                <label lang="de">Syrien</label>
+                <label lang="en">Syrien</label>
+            </option>
+            <option value="XB-TW">
+                <label lang="de">Taiwan</label>
+                <label lang="en">Taiwan</label>
+            </option>
+            <option value="XC-TZ">
+                <label lang="de">Tansania</label>
+                <label lang="en">Tanzania</label>
+            </option>
+            <option value="XB-TH">
+                <label lang="de">Thailand</label>
+                <label lang="en">Thailand</label>
+            </option>
+            <option value="XD-TT">
+                <label lang="de">Trinidad und Tobago</label>
+                <label lang="en">Trinidad und Tobago</label>
+            </option>
+            <option value="XA-CZ">
+                <label lang="de">Tschechische Republik</label>
+                <label lang="en">Czech Republic</label>
+            </option>
+            <option value="XA-CSHH">
+                <label lang="de">Tschechoslowakei</label>
+                <label lang="en">Czechoslovakia</label>
+            </option>
+            <option value="XB-TR">
+                <label lang="de">Türkei</label>
+                <label lang="en">Turkey</label>
+            </option>
+            <option value="XC-TN">
+                <label lang="de">Tunesien</label>
+                <label lang="en">Tunisia</label>
+            </option>
+            <option value="XC-UG">
+                <label lang="de">Uganda</label>
+                <label lang="en">Uganda</label>
+            </option>
+            <option value="XA-UA">
+                <label lang="de">Ukraine</label>
+                <label lang="en">Ukraine</label>
+            </option>
+            <option value="XA-HU">
+                <label lang="de">Ungarn</label>
+                <label lang="en">Hungary</label>
+            </option>
+            <option value="XD-UY">
+                <label lang="de">Uruguay</label>
+                <label lang="en">Uruguay</label>
+            </option>
+            <option value="XD-US">
+                <label lang="de">USA</label>
+                <label lang="en">United States of America</label>
+            </option>
+            <option value="XD-VE">
+                <label lang="de">Venezuela</label>
+                <label lang="en">Venezuela</label>
+            </option>
+            <option value="XB-AE">
+                <label lang="de">Vereinigte Arabische Emirate</label>
+                <label lang="en">United Arab Emirates</label>
+            </option>
+            <option value="XB-VN">
+                <label lang="de">Vietnam</label>
+                <label lang="en">Vietnam</label>
+            </option>
+            <option value="XA-CY">
+                <label lang="de">Zypern</label>
+                <label lang="en">Cyprus</label>
+            </option>
+            <option value="XC">
+                <label lang="de">Afrika (Kontinent)</label>
+                <label lang="en">Africa (continent)</label>
+            </option>
+            <option value="XD">
+                <label lang="de">Amerika (Kontinent)</label>
+                <label lang="en">America (continent)</label>
+            </option>
+            <option value="XB">
+                <label lang="de">Asien (Kontinent)</label>
+                <label lang="en">Asia (continent)</label>
+            </option>
+            <option value="XA">
+                <label lang="de">Europa (Kontinent)</label>
+                <label lang="en">Europe (continent)</label>
+            </option>
+            <option value="XM">
+                <label lang="de">Pazifischer Ozean</label>
+                <label lang="en">Pacific Ocean</label>
+            </option>
+            <option value="XP">
+                <label lang="de">Internationale Staatengemeinschaften, internationale Organisationen, internationale Körperschaften</label>
+                <label lang="en">International communities of states, international organizations, international bodies</label>
+            </option>
+            <option value="ZZ">
+                <label lang="de">Unbekanntes Land</label>
+                <label lang="en">Country unknown</label>
+            </option>
+        </key>
+        <!-- Metadatum mit Default-Wert, der in der Regel nicht geändert und nicht vom Crowdsourcing-Tool ausgelesen bzw. berücksichtigt werden muss -->
+        <key id="2050">
+            <label lang="de">URN</label>
+            <label lang="en">URN</label>
+            <codomain type="anyURI"/>
+        </key>
+        <!-- "Nummern" allgemein; wird derzeit verwendet, um sowohl "Bestellnummern" als auch "Lizenznummern" und "Sonstige Nummern" abzubilden -->
+        <key id="2230">
+            <label lang="de">Nummer(n)</label>
+            <label lang="en">Number(s)</label>
+        </key>
+        <!-- "Bestellnummer" - spezialisiertes Feld, das im Crowdsourcing-Tool deaktiviert wird, aber vorerst im Regelsatz bleibt und bei Bedarf später wieder verwendet wird -->
+        <key id="2230_1">
+            <label lang="de">Bestellnummer</label>
+            <label lang="en">Order number</label>
+        </key>
+        <!-- "Lizenznummer" - spezialisiertes Feld, das im Crowdsourcing-Tool deaktiviert wird, aber vorerst im Regelsatz bleibt und bei Bedarf später wieder verwendet wird -->
+        <key id="2230_2">
+            <label lang="de">Lizenznummer</label>
+            <label lang="en">Licence number</label>
+        </key>
+        <!-- "Sonstige Nummer" - spezialisiertes Feld, das im Crowdsourcing-Tool deaktiviert wird, aber vorerst im Regelsatz bleibt und bei Bedarf später wieder verwendet wird -->
+        <key id="2230_3">
+            <label lang="de">Sonstige Nummer</label>
+            <label lang="en">Other number</label>
+        </key>
+        <key id="3010">
+            <label lang="de">Personen</label>
+            <label lang="en">Persons</label>
+            <key id="3010_1">
+                <label lang="de">Nachname, Vorname(n)</label>
+                <label lang="en">Surname, first name(s)</label>
+            </key>
+            <!-- TODO: wird im K10+ zu PPN umgewandelt -->
+            <key id="3010_2">
+                <label lang="de">GND-Nummer</label>
+                <label lang="en">GND-ID</label>
+            </key>
+            <key id="3010_3">
+                <label lang="de">Rolle</label>
+                <label lang="en">Role</label>
+                <option value="art">
+                    <label lang="de">KünstlerIn</label>
+                    <label lang="en">Artist</label>
+                </option>
+                <option value="au">
+                    <label lang="de">VerfasserIn</label>
+                    <label lang="en">Author</label>
+                </option>
+                <option value="edt">
+                    <label lang="de">Herausgebende Person</label>
+                    <label lang="en">Publisher</label>
+                </option>
+                <option value="pht">
+                    <label lang="de">FotografIn</label>
+                    <label lang="en">Photographer</label>
+                </option>
+                <option value="dsr">
+                    <label lang="de">DesignerIn</label>
+                    <label lang="en">Designer</label>
+                </option>
+                <option value="wst">
+                    <label lang="de">VerfasserIn von ergänzendem Text</label>
+                    <label lang="en">Publisher of additional text</label>
+                </option>
+                <option value="trl">
+                    <label lang="de">ÜbersetzerIn</label>
+                    <label lang="en">Translator</label>
+                </option>
+                <option value="ctb">
+                    <label lang="de">Mitwirkende</label>
+                    <label lang="en">Contributor</label>
+                </option>
+                <option value="oth">
+                    <label lang="de">Sonstige</label>
+                    <label lang="en">Other</label>
+                </option>
+            </key>
+        </key>
+        <key id="3110">
+            <label lang="de">Organisationen</label>
+            <label lang="en">Organisations</label>
+            <key id="3110_1">
+                <label lang="de">Name</label>
+                <label lang="en">Name</label>
+            </key>
+            <!-- TODO: wird im K10+ zu PPN umgewandelt -->
+            <key id="3110_2">
+                <label lang="de">GND-Nummer</label>
+                <label lang="en">GND-ID</label>
+            </key>
+            <key id="3110_3">
+                <label lang="de">Funktion</label>
+                <label lang="en">Role</label>
+                <option value="isb">
+                    <label lang="de">Herausgebende Organisation</label>
+                    <label lang="en">Publishing body</label>
+                </option>
+                <option value="orm">
+                    <label lang="de">VeranstalterIn</label>
+                    <label lang="en">Organizer</label>
+                </option>
+                <option value="dsr">
+                    <label lang="de">DesignerIn</label>
+                    <label lang="en">Designer</label>
+                </option>
+                <option value="oth">
+                    <label lang="de">Sonstige</label>
+                    <label lang="en">Other</label>
+                </option>
+            </key>
+        </key>
+        <key id="3260">
+            <label lang="de">Abweichende Titelsucheinträge</label>
+            <label lang="en">Alternative title search entries</label>
+        </key>
+        <key id="4000">
+            <label lang="de">Titel und Titelzusätze</label>
+            <label lang="en">Title and additional title</label>
+            <key id="4000_1" use="structureTreeTitle">
+                <label lang="de">Titel</label>
+                <label lang="en">Title</label>
+            </key>
+            <key id="4000_2">
+                <label lang="de">Zusätze zum Titel</label>
+                <label lang="en">Additional titles</label>
+            </key>
+        </key>
+        <key id="4002">
+            <label lang="de">Titel in weiteren Sprachen</label>
+            <label lang="en">Title in other languages</label>
+        </key>
+        <key id="4020">
+            <label lang="de">Ausgabe</label>
+            <label lang="en">Edition</label>
+        </key>
+        <key id="4030">
+            <label lang="de">Erscheinungsort und Verlag</label>
+            <label lang="en">Place of publication and publisher</label>
+            <key id="4030_1">
+                <label lang="de">Erscheinungsort</label>
+                <label lang="en">Publication place</label>
+            </key>
+            <key id="4030_2">
+                <label lang="de">Verlag</label>
+                <label lang="de">Publisher</label>
+            </key>
+        </key>
+        <key id="4045">
+            <label lang="de">Herstellungsangabe</label>
+            <label lang="en">Production notes</label>
+            <key id="4045_1">
+                <label lang="de">Herstellungsort</label>
+                <label lang="en">Place of production</label>
+            </key>
+            <key id="4045_2">
+                <label lang="de">Hersteller</label>
+                <label lang="en">Producer</label>
+            </key>
+        </key>
+        <!-- Metadatum mit Default-Wert, der in der Regel nicht geändert und nicht vom Crowdsourcing-Tool ausgelesen bzw. berücksichtigt werden muss -->
+        <key id="4060">
+            <label lang="de">Umfang</label>
+            <label lang="en">Extent</label>
+            <preset>1 Plakat</preset>
+        </key>
+        <key id="4061">
+            <label lang="de">Farbig</label>
+            <label lang="en">Colored</label>
+            <option value="true">
+                <label lang="de">Ja</label>
+                <label lang="en">Yes</label>
+            </option>
+            <option value="false">
+                <label lang="de">Nein</label>
+                <label lang="en">No</label>
+            </option>
+            <!-- NOTE: preset for boolean metadata bugged, see https://github.com/kitodo/kitodo-production/issues/5689 -->
+            <preset>true</preset>
+        </key>
+        <key id="4062">
+            <label lang="de">Format</label>
+            <label lang="en">Format</label>
+        </key>
+        <!-- Metadatum mit Default-Wert, der in der Regel nicht geändert und nicht vom Crowdsourcing-Tool ausgelesen bzw. berücksichtigt werden muss -->
+        <key id="4065">
+            <label lang="de">Besitznachweis des reproduzierten Exemplars</label>
+            <preset>XA-DE$cWürttembergische Landesbibliothek Stuttgart$a[Signatur]</preset>
+        </key>
+        <!-- Metadatum mit Default-Wert, der in der Regel nicht geändert und nicht vom Crowdsourcing-Tool ausgelesen bzw. berücksichtigt werden muss -->
+        <key id="4066">
+            <label lang="de">Besitznachweis Master</label>
+            <preset>XA-DE$cDE-24</preset>
+        </key>
+        <!-- Metadatum mit Default-Wert, der in der Regel nicht geändert und nicht vom Crowdsourcing-Tool ausgelesen bzw. berücksichtigt werden muss -->
+        <key id="4110">
+            <label lang="de">Gesamttitel der Reproduktion</label>
+            <preset>Digitale Sammlungen der Württembergischen Landesbibliothek$pSammlung Proteste$pPlakate$pSammlung Hill</preset>
+        </key>
+        <!-- Metadatum mit Default-Wert, der in der Regel nicht geändert und nicht vom Crowdsourcing-Tool ausgelesen bzw. berücksichtigt werden muss -->
+        <key id="4120">
+            <label lang="de">Verknüpfung zum Gesamttitel der Reproduktion</label>
+            <preset>(DE-627)1929557051</preset>
+        </key>
+        <key id="4201">
+            <label lang="de">Interne Bearbeitungshinweise</label>
+            <label lang="en">Internal editor's comments</label>
+        </key>
+        <key id="4207">
+            <label lang="de">Bildmotiv</label>
+            <label lang="en">Picture motif</label>
+        </key>
+        <key id="4212">
+            <label lang="de">Abweichender Titel</label>
+            <label lang="en">Alternative Title</label>
+        </key>
+        <!-- Metadatum mit Default-Wert, der in der Regel nicht geändert und nicht vom Crowdsourcing-Tool ausgelesen bzw. berücksichtigt werden muss -->
+        <key id="4233">
+            <label lang="de">LastCopy</label>
+            <preset>aaa$fSLG$xXA-DE-BW$zProteste$5DE-24</preset>
+        </key>
+        <key id="4238">
+            <label lang="de">Reproduktionshinweis</label>
+            <preset>Online-Ausgabe$bStuttgart$cWürttembergische Landesbibliothek$d2026$e1 Online-Ressource</preset>
+        </key>
+        <!-- Wird in der aktuellen Fassung im Regelsatz nicht benötigt, sondern wird beim Export nach Presentation auf einen statischen Wert gesetzt -->
+        <key id="4256">
+            <label lang="de">Beziehungen zur Reproduktion in anderer physischer Form</label>
+        </key>
+        <key id="4950">
+            <label lang="de">URL</label>
+            <label lang="en">URL</label>
+            <codomain type="anyURI"/>
+        </key>
+        <key id="5519">
+            <label lang="de">Veranstaltungsplakat</label>
+            <label lang="en">Event poster</label>
+            <option value="true">
+                <label lang="de">Ja</label>
+                <label lang="en">Yes</label>
+            </option>
+            <option value="false">
+                <label lang="de">Nein</label>
+                <label lang="en">No</label>
+            </option>
+            <!-- NOTE: preset for boolean metadata bugged, see https://github.com/kitodo/kitodo-production/issues/5689 -->
+            <preset>false</preset>
+        </key>
+        <!-- Zeitschlagwort (aufgeteilt in "Start" (5520_1) und "Ende" (5520_2), um ggf. Zeitraum abbilden zu können -->
+        <!-- Zeitschlagwort - Start (5520_1): mit Unterfeldern für Tag, Monat, Jahr -->
+        <key id="5520_1">
+            <label lang="de">Veranstaltungsdatum</label>
+            <label lang="en">Event date</label>
+            <key id="5520_1_1">
+                <label lang="de">Tag</label>
+                <label lang="en">Day</label>
+            </key>
+            <key id="5520_1_2">
+                <label lang="de">Monat</label>
+                <label lang="en">Month</label>
+            </key>
+            <key id="5520_1_3">
+                <label lang="de">Jahr</label>
+                <label lang="en">Year</label>
+            </key>
+        </key>
+        <!-- Zeitschlagwort - Ende (5520_2): mit Unterfeldern für Tag, Monat, Jahr -->
+        <!-- Wird vorerst im Crowdsourcing-Tool deaktiviert, da eine eindeutige Zuordnung von mehreren Start- und Endzeitpunkten nicht möglich ist -->
+        <key id="5520_2">
+            <label lang="de">Ende eines Zeitraums</label>
+            <label lang="en">End of a period</label>
+            <key id="5520_2_1">
+                <label lang="de">Tag</label>
+                <label lang="en">Day</label>
+            </key>
+            <key id="5520_2_2">
+                <label lang="de">Monat</label>
+                <label lang="en">Month</label>
+            </key>
+            <key id="5520_2_3">
+                <label lang="de">Jahr</label>
+                <label lang="en">Year</label>
+            </key>
+        </key>
+        <!-- Schlagwörter -->
+        <key id="5580">
+            <label lang="de">Schlagwörter zu Themen, Personen, Organisationen, Orten</label>
+            <label lang="en">Topics, people, organizations, places keywords</label>
+            <key id="5580_1">
+                <label lang="de">Thema, Person, Organisation, Ort</label>
+                <label lang="en">Topic, person, organization, place</label>
+            </key>
+            <!-- TODO: wird im K10+ zu PPN umgewandelt -->
+            <key id="5580_2">
+                <label lang="de">GND-Nummer</label>
+                <label lang="en">GND-ID</label>
+            </key>
+        </key>
+        <key id="5581">
+            <label lang="de">Veranstaltungsort</label>
+            <label lang="en">Event location</label>
+            <key id="5581_1">
+                <label lang="de">Ort</label>
+                <label lang="en">Place</label>
+            </key>
+            <!-- TODO: wird im K10+ zu PPN umgewandelt -->
+            <key id="5581_2">
+                <label lang="de">GND-Nummer</label>
+                <label lang="en">GND-ID</label>
+            </key>
+        </key>
+
+        <!-- Wird in der aktuellen Fassung im Regelsatz nicht benötigt, sondern wird beim Export nach Presentation auf einen statischen Wert gesetzt -->
+        <!-- TODO: bei Export Signatur anhängen! -->
+        <key id="4801">
+            <label lang="de">Exemplarbezogener Kommentar</label>
+            <preset>*** Volltext-Zugang. - Copyright Württ. Landesbibliothek Stuttgart. - Signatur des Originals: [SIGNATUR]</preset>
+        </key>
+        <!-- Metadatum mit Default-Wert, der in der Regel nicht geändert und nicht vom Crowdsourcing-Tool ausgelesen bzw. berücksichtigt werden muss -->
+        <key id="4832">
+            <label lang="de">Auftraggeber Digitalisierung</label>
+            <preset>Württembergische Landesbibliothek</preset>
+        </key>
+        <!-- Metadatum mit Default-Wert, der in der Regel nicht geändert und nicht vom Crowdsourcing-Tool ausgelesen bzw. berücksichtigt werden muss -->
+        <key id="7100">
+            <label lang="de">Bibliotheksigel und Fernleihcode</label>
+            <preset>$B24$Jn</preset>
+        </key>
+        <key id="7133">
+            <label lang="de">Zugriff Online-Ressource</label>
+            <preset>[URL]</preset>
+        </key>
+        <!-- Metadatum mit Default-Wert, der in der Regel nicht geändert und nicht vom Crowdsourcing-Tool ausgelesen bzw. berücksichtigt werden muss -->
+        <key id="9100">
+            <label lang="de">Provenienzangabe</label>
+            <preset>DE-24$3[Signatur]|vb|!1869944577!$kPlakatsammlung Thomas Hill</preset>
+        </key>
+        <!-- Metadatum mit Default-Wert, der in der Regel nicht geändert und nicht vom Crowdsourcing-Tool ausgelesen bzw. berücksichtigt werden muss -->
+        <!-- TODO: Abrufzeichen Kampagne entweder in Kitodo oder beim Export hinten anfängen! -->
+        <key id="8012">
+            <label lang="de">Abrufzeichen</label>
+            <!-- "p001" bei neuer Kampagne durch neues Kampagnen-Abrufzeichen ersetzen -->
+            <preset>cofz$admas$agoob$aslpr$ahill$aplak$ap001</preset>
+        </key>
+    </declaration>
+    <correlation>
+        <!-- Hinweis: die <permit>s für alle Metadaten, die in der von der WLB bereitgestellten Liste einen weißen
+                      Hintergrund haben und damit einen statischen Wert erhalten sollen, sind hier derzeit
+                      auskommentiert, die die entsprechenden Keys im "declaration"-Teil dieses Regelsatzes ebenfalls
+                      auskommentiert sind.
+                      Falls die "keys" einkommentiert werden, sollten die entsprechenden "permits" hier ebenfalls
+                      aktiviert werden. Diese Permits haben alle ein "minOccurs=1" und "maxOccurs=1", da alle immer
+                      genau einen statischen - aber änderbaren - Wert enthalten. -->
+        <restriction division="Plakat" unspecified="forbidden">
+            <permit key="Signatur" minOccurs="1" maxOccurs="1"/>
+            <permit key="Signatur_intern" minOccurs="1" maxOccurs="1"/>
+            <permit key="ISIL_Signatur" minOccurs="1" maxOccurs="1"/>
+            <permit key="media_type" minOccurs="1" maxOccurs="1"/>
+            <permit key="Volltext" minOccurs="0" maxOccurs="1"/>
+            <permit key="Zugriffslizenz" minOccurs="1" maxOccurs="1"/>
+            <permit key="DigitaleKollektion" minOccurs="1" maxOccurs="2"/>
+            <!-- PPN -->
+            <permit key="0100" minOccurs="0" maxOccurs="1"/>
+            <!-- Status -->
+            <permit key="0500" minOccurs="1" maxOccurs="1"/>
+            <!-- Inhaltstyp - wird beim Export erzeugt -->
+            <!-- <permit key="0501" minOccurs="1" maxOccurs="1"/> -->
+            <permit key="0501_1" minOccurs="1" maxOccurs="1"/>
+            <!-- Text vorhanden -->
+            <permit key="0501_2" minOccurs="1" maxOccurs="1"/>
+            <!-- Medientyp -->
+            <permit key="0502" minOccurs="1" maxOccurs="1"/>
+            <!-- Datenträgertyp -->
+            <permit key="0503" minOccurs="1" maxOccurs="1"/>
+            <!-- Rückseite ist bedruckt -->
+            <permit key="0599_3" minOccurs="1" maxOccurs="1"/>
+            <!-- Entstehungsdatum -->
+            <permit key="1100_1" minOccurs="0" maxOccurs="1">
+                <permit key="1100_1_1" minOccurs="1" maxOccurs="1"/> <!-- Jahr (Pflicht) -->
+                <permit key="1100_1_2" minOccurs="0" maxOccurs="1"/> <!-- ca. -->
+                <permit key="1100_1_3" minOccurs="0" maxOccurs="1"/> <!-- vor -->
+                <permit key="1100_1_4" minOccurs="0" maxOccurs="1"/> <!-- nach -->
+            </permit>
+            <permit key="1100_2" minOccurs="0" maxOccurs="1">
+                <permit key="1100_2_1" minOccurs="1" maxOccurs="1"/> <!-- Jahr (Pflicht) -->
+            </permit>
+            <!-- Materialspezifische Codes -->
+            <permit key="1101" minOccurs="1" maxOccurs="1"/>
+            <!-- Copyrightjahr -->
+            <permit key="1108" minOccurs="0" maxOccurs="1"/>
+            <!-- Inhalt -->
+            <permit key="1131" minOccurs="1" maxOccurs="1"/>
+            <!-- Veröffentlichungsart -->
+            <permit key="1140" minOccurs="1" maxOccurs="1"/>
+            <!-- Sprache(n) -->
+            <permit key="1500" minOccurs="0" maxOccurs="5"/>
+            <!-- Erscheinungsland -->
+            <permit key="1700" minOccurs="1" maxOccurs="1"/>
+            <!-- URN -->
+            <permit key="2050" minOccurs="1" maxOccurs="1"/>
+            <!-- Nummer(n) -->
+            <permit key="2230" minOccurs="0" maxOccurs="3"/>
+            <!-- Bestellnummer -->
+            <permit key="2230_1" minOccurs="0" maxOccurs="1"/>
+            <!-- Lizenznummer -->
+            <permit key="2230_2" minOccurs="0" maxOccurs="1"/>
+            <!-- Sonstige Nummer -->
+            <permit key="2230_3" minOccurs="0" maxOccurs="1"/>
+            <!-- Person(en) -->
+            <permit key="3010" minOccurs="0" maxOccurs="5">
+                <permit key="3010_1" minOccurs="0" maxOccurs="1"/> <!-- Nachname, Vorname(n) -->
+                <permit key="3010_2" minOccurs="0" maxOccurs="1"/> <!-- GND-Nummer -->
+                <permit key="3010_3" minOccurs="0" maxOccurs="1"/> <!-- Rolle -->
+            </permit>
+            <!-- Organisationen -->
+            <permit key="3110" minOccurs="0" maxOccurs="5">
+                <permit key="3110_1" minOccurs="0" maxOccurs="1"/> <!-- Name -->
+                <permit key="3110_2" minOccurs="0" maxOccurs="1"/> <!-- GND-Nummer -->
+                <permit key="3110_3" minOccurs="0" maxOccurs="1"/> <!-- Funktion -->
+            </permit>
+            <!-- Abweichende Titelsucheinstiege -->
+            <permit key="3260" minOccurs="0" maxOccurs="1"/>
+            <!-- Titel und Titelzusätze -->
+            <permit key="4000" minOccurs="1" maxOccurs="1">
+                <permit key="4000_1" minOccurs="1" maxOccurs="1"/> <!-- Titel -->
+                <permit key="4000_2" minOccurs="0" maxOccurs="3"/> <!-- Zusätze zum Titel -->
+            </permit>
+            <!-- Titel in weiteren Sprachen -->
+            <permit key="4002" minOccurs="0" maxOccurs="3"/>
+            <!-- Ausgabe -->
+            <permit key="4020" minOccurs="0" maxOccurs="1"/>
+            <!-- Erscheinungsort und Verlag -->
+            <permit key="4030" minOccurs="0" maxOccurs="1">
+                <permit key="4030_1" minOccurs="0" maxOccurs="3"/> <!-- Erscheinungsort -->
+                <permit key="4030_2" minOccurs="0" maxOccurs="1"/> <!-- Verlag -->
+            </permit>
+            <!-- Herstellungsangabe -->
+            <permit key="4045" minOccurs="0" maxOccurs="1">
+                <permit key="4045_1" minOccurs="0" maxOccurs="1"/> <!-- Herstellungsort -->
+                <permit key="4045_2" minOccurs="0" maxOccurs="1"/> <!-- Hersteller -->
+            </permit>
+            <!-- Umfang -->
+            <permit key="4060" minOccurs="1" maxOccurs="1"/>
+            <!-- Farbig -->
+            <permit key="4061" minOccurs="1" maxOccurs="1"/>
+            <!-- Format -->
+            <permit key="4062" minOccurs="1" maxOccurs="1"/>
+            <!-- Besitznachweis des reproduzierten Exemplars -->
+            <permit key="4065" minOccurs="1" maxOccurs="1"/>
+            <!-- Besitznachweis Master -->
+            <permit key="4066" minOccurs="1" maxOccurs="1"/>
+            <!-- Gesamttitel der Reproduktion -->
+            <permit key="4110" minOccurs="1" maxOccurs="1"/>
+            <!-- Verknüpfung zum Gesamttitel der Reproduktion -->
+            <permit key="4120" minOccurs="1" maxOccurs="1"/>
+            <!-- Interne Bearbeitungshinweise -->
+            <permit key="4201" minOccurs="0" maxOccurs="3"/>
+            <!-- Bildmotiv -->
+            <permit key="4207" minOccurs="0" maxOccurs="1"/>
+            <!-- Abweichender Titel -->
+            <permit key="4212" minOccurs="0" maxOccurs="1"/>
+            <!-- LastCopy -->
+            <permit key="4233" minOccurs="1" maxOccurs="1"/>
+            <!-- Beziehungen zur Reproduktion in anderer physischer Form -->
+            <permit key="4256" minOccurs="0" maxOccurs="1"/>
+            <!-- Reproduktionshinweis -->
+            <permit key="4238" minOccurs="1" maxOccurs="1"/>
+            <!-- URL -->
+            <permit key="4950" minOccurs="1" maxOccurs="1"/>
+            <!-- Veranstaltungsplakat -->
+            <permit key="5519" minOccurs="1" maxOccurs="1"/>
+            <!-- Veranstaltungsdatum -->
+            <permit key="5520_1" minOccurs="0" maxOccurs="3">
+                <permit key="5520_1_1" minOccurs="0" maxOccurs="1"/> <!-- Tag -->
+                <permit key="5520_1_2" minOccurs="0" maxOccurs="1"/> <!-- Monat -->
+                <permit key="5520_1_3" minOccurs="1" maxOccurs="1"/> <!-- Jahr (Pflicht) -->
+            </permit>
+            <permit key="5520_2" minOccurs="0" maxOccurs="3">
+                <permit key="5520_2_1" minOccurs="0" maxOccurs="1"/> <!-- Tag -->
+                <permit key="5520_2_2" minOccurs="0" maxOccurs="1"/> <!-- Monat -->
+                <permit key="5520_2_3" minOccurs="1" maxOccurs="1"/> <!-- Jahr (Pflicht) -->
+            </permit>
+            <!-- Schlagwörter zu Themen, Personen, Organisationen, Orten -->
+            <permit key="5580" minOccurs="0" maxOccurs="10">
+                <permit key="5580_1" minOccurs="0" maxOccurs="1"/> <!-- Thema, Person, Organisation, Ort -->
+                <permit key="5580_2" minOccurs="0" maxOccurs="1"/> <!-- GND-Nummer -->
+            </permit>
+            <!-- Veranstaltungsort -->
+            <permit key="5581" minOccurs="0" maxOccurs="3">
+                <permit key="5581_1" minOccurs="0" maxOccurs="1"/> <!-- Ort -->
+                <permit key="5581_2" minOccurs="0" maxOccurs="1"/> <!-- GND-Nummer -->
+            </permit>
+            <!-- Exemplarbezogener Kommentar -->
+            <permit key="4801" minOccurs="1" maxOccurs="1"/>
+            <!-- Auftraggeber Digitalisierung -->
+            <permit key="4832" minOccurs="1" maxOccurs="1"/>
+            <!-- Bibliotheksigel und Fernleihcode -->
+            <permit key="7100" minOccurs="1" maxOccurs="1"/>
+            <!-- Zugriff Online-Ressource -->
+            <permit key="7133" minOccurs="1" maxOccurs="1"/>
+            <!-- Provenienzangabe -->
+            <permit key="9100" minOccurs="1" maxOccurs="1"/>
+            <!-- Abrufzeichen -->
+            <permit key="8012" minOccurs="1" maxOccurs="1"/>
+        </restriction>
+    </correlation>
+    <editing>
+        <!-- Color -->
+        <setting key="4061_2" alwaysShowing="true" multiline="true"/>
+        <setting key="ISIL_Signatur" editable="false"/>
+        <setting key="Signatur_intern" editable="false"/>
+    </editing>
+</ruleset>

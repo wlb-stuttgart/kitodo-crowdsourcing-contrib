@@ -1,0 +1,1467 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ruleset xmlns="http://names.kitodo.org/ruleset/v2" lang="en">
+  <declaration>
+    <!-- docType divisions -->
+    <division id="Monograph" processTitle="TSL_ATS+'_'+CatalogIDDigital">
+      <label>Monograph</label>
+      <label lang="de">Monographie</label>
+    </division>
+    <division id="MultiVolumeWork" processTitle="TSL_ATS+'_'+CatalogIDDigital" withWorkflow="false" use="createChildrenFromParent">
+      <label>Multivolume Work</label>
+      <label lang="de">Mehrbändiges Werk</label>
+    </division>
+    <division id="Volume" processTitle="TSL_ATS+'_'+CatalogIDDigital">
+      <label>Volume</label>
+      <label lang="de">Band</label>
+    </division>
+    <division id="Periodical" processTitle="TSL_ATS+'_'+CatalogIDDigital" withWorkflow="false" use="createChildrenFromParent">
+      <label>Periodical</label>
+      <label lang="de">Zeitschrift</label>
+    </division>
+    <division id="PeriodicalVolume" processTitle="TSL_ATS+'_'+CatalogIDDigitalAnchor+'_'+CurrentNoSorting">
+      <label>Periodical volume</label>
+      <label lang="de">Zeitschriften-Band</label>
+    </division>
+    <division id="Newspaper" processTitle="TSL_ATS+'_'+CatalogIDDigital" withWorkflow="false" use="createChildrenWithCalendar">
+      <label>Newspaper</label>
+      <label lang="de">Zeitung ‹Gesamtausgabe›</label>
+        <subdivisionByDate>
+          <division dates="ORDERLABEL" id="NewspaperYear" scheme="yyyy" processTitle="+'-'+#YEAR" withWorkflow="false">
+            <label>Year’s issues ‹newspaper›</label>
+            <label lang="de">Jahrgang ‹Zeitung›</label>
+          </division>
+          <division dates="ORDERLABEL" id="NewspaperMonth" scheme="yyyy-MM">
+            <label>Month’s issues ‹newspaper›</label>
+            <label lang="de">Monat ‹Zeitung›</label>
+          </division>
+          <division dates="ORDERLABEL" id="NewspaperDay" scheme="yyyy-MM-dd">
+            <label>Day’s issues ‹newspaper›</label>
+            <label lang="de">Tag ‹Zeitung›</label>
+          </division>
+        </subdivisionByDate>
+    </division>
+    <division id="NewspaperIssue" processTitle="+'-'+#YEAR+#MONTH+#DAY">
+      <label>Issue ‹newspaper›</label>
+      <label lang="de">Ausgabe ‹Zeitung›</label>
+    </division>
+
+    <!-- Strukturdaten -->
+    <division id="additional">
+      <label>Additional</label>
+      <label lang="de">Beilage</label>
+    </division>
+    <division id="annotation">
+      <label>Annotation</label>
+      <label lang="de">Annotation</label>
+    </division>
+    <division id="bookplate">
+      <label>Bookplate</label>
+      <label lang="de">Exlibris</label>
+    </division>
+    <division id="Chapter">
+      <label>Chapter</label>
+      <label lang="de">Kapitel</label>
+    </division>
+    <division id="corrigenda">
+      <label>Corrigenda</label>
+      <label lang="de">Errata</label>
+    </division>
+    <division id="Cover">
+      <label>Cover</label>
+      <label lang="de">Einband</label>
+    </division>
+    <division id="dedication">
+      <label>Dedication</label>
+      <label lang="de">Widmung</label>
+    </division>
+    <division id="edge">
+      <label>Edge</label>
+      <label lang="de">Schnitt</label>
+    </division>
+    <division id="endsheet">
+      <label>Endsheet</label>
+      <label lang="de">Vorsatz</label>
+    </division>
+    <division id="fascicle">
+      <label>Fascicle</label>
+      <label lang="de">Faszikel</label>
+    </division>
+    <division id="fragment">
+      <label>Fragment</label>
+      <label lang="de">Fragment</label>
+    </division>
+    <division id="Illustration">
+      <label>Illustration</label>
+      <label lang="de">Illustration</label>
+    </division>
+    <division id="ImprintColophon">
+      <label>Imprint</label>
+      <label lang="de">Impressum</label>
+    </division>
+    <division id="Index">
+      <label>Index</label>
+      <label lang="de">Register</label>
+    </division>
+    <division id="initial_decoration">
+      <label>Initial decoration</label>
+      <label lang="de">Initialschmuck</label>
+    </division>
+    <division id="Map">
+      <label>Map</label>
+      <label lang="de">Karte</label>
+    </division>
+    <division id="Music">
+      <label>Music</label>
+      <label lang="de">Musiknotation</label>
+    </division>
+    <division id="paste_down">
+      <label>Paste Down</label>
+      <label lang="de">Spiegel</label>
+    </division>
+    <division id="preface">
+      <label>Preface</label>
+      <label lang="de">Vorwort</label>
+    </division>
+    <division id="spine">
+      <label>Spine</label>
+      <label lang="de">Rücken</label>
+    </division>
+    <division id="TableList">
+      <label>Table / List</label>
+      <label lang="de">Tabelle</label>
+    </division>
+    <division id="TableOfContents">
+      <label>Table of Contents</label>
+      <label lang="de">Inhaltsverzeichnis</label>
+    </division>
+    <division id="TextSection">
+      <label>Text section</label>
+      <label lang="de">Text</label>
+    </division>
+    <division id="TitlePage">
+      <label>Title Page</label>
+      <label lang="de">Titelblatt</label>
+    </division>
+    <division id="ContainedWork">
+      <label>Contained Work</label>
+      <label lang="de">Beigefügtes oder Enthaltenes Werk</label>
+    </division>
+    <division id="PeriodicalIssue">
+      <label>Periodical Issue</label>
+      <label lang="de">Zeitschriften-Ausgabe / -Heft</label>
+    </division>
+
+
+    <!-- keys -->
+
+    <!-- spezielle keys (fuer <structMap TYPE="LOGICAL">) -->
+    <key domain="mets:div" id="LABEL">
+      <label>Main title ‹METS›</label>
+      <label lang="de">Haupttitel ‹METS›</label>
+    </key>
+    <key domain="mets:div" id="ORDERLABEL">
+      <label>Main title (sorting) ‹METS›</label>
+      <label lang="de">Haupttitel (Sortierung) ‹METS›</label>
+    </key>
+
+
+    <!-- Identifier -->
+    <key id="CatalogIDDigital" use="recordIdentifier displaySummary">
+        <label>PPN (digital)</label>
+        <label lang="de">PPN (Digitalisat)</label>
+    </key>
+    <key id="CatalogIDDigitalAnchor" use="higherlevelIdentifier">
+        <label>PPN (digital copy) anchor</label>
+        <label lang="de">PPN (Digitalisat) Überordnung</label>
+    </key>
+    <key id="docType" use="docType">
+        <label>Document type</label>
+        <label lang="de">Dokumenttyp</label>
+    </key>
+    <key id="processTitle" use="processTitle">
+        <label>Process title</label>
+        <label lang="de">Vorgangstitel</label>
+    </key>
+
+    <!-- keys mit Auswahloptionen -->
+    <key id="AccessLicense">
+      <label>License</label>
+      <label lang="de">Zugriffslizenz</label>
+      <option value="https://creativecommons.org/publicdomain/mark/1.0/">
+        <label>Public Domain Mark 1.0</label>
+      </option>
+      <option value="http://digital.wlb-stuttgart.de/lizenzen/rv-fz/1.0/">
+        <label>Rechte vorbehalten - Freier Zugang</label>
+      </option>
+      <option value="http://digital.wlb-stuttgart.de/lizenzen/rv-fz-andere/1.0/">
+        <label>Rechte vorbehalten - Freier Zugang - Andere rechtliche Beschränkungen</label>
+      </option>
+    </key>
+    <key id="singleDigCollection">
+      <label>Digital collections</label>
+      <label lang="de">Digitale Kollektionen</label>
+      <option value="altedrucke">
+        <label>Alte und Wertvolle Drucke</label>
+      </option>
+      <option value="bfz">
+        <label>Bibliothek für Zeitgeschichte</label>
+      </option>
+      <option value="bfzfotozdw">
+        <label>Zeit der Weltkriege - Fotos</label>
+      </option>
+      <option value="bfzplakat">
+        <label>BfZ - Plakate</label>
+      </option>
+      <option value="bfzplakatzdw">
+        <label>Zeit der Weltkriege - Plakate</label>
+      </option>
+      <option value="bibeln">
+        <label>Bibeln</label>
+      </option>
+      <option value="dc_frommann">
+        <label>Sammlung Frommann</label>
+      </option>
+      <option value="dc_jubi">
+        <label>Landesjubiläum</label>
+      </option>
+      <option value="dc_nsraubgut">
+        <label>NS-Raubgut</label>
+      </option>
+      <option value="dc_stammbuch">
+        <label>Stammbücher</label>
+      </option>
+      <option value="graphik">
+        <label>Graphische Sammlungen</label>
+      </option>
+      <option value="handschriften">
+        <label>Handschriften</label>
+      </option>
+      <option value="historischezeitschriften">
+        <label>Historische Zeitschriften</label>
+      </option>
+      <option value="historischezeitungen">
+        <label>Historische Zeitungen</label>
+      </option>
+      <option value="hoelderlin">
+        <label>Hölderlin</label>
+      </option>
+      <option value="karten">
+        <label>Karten</label>
+      </option>
+      <option value="landtag">
+        <label>Landtagsprotokolle</label>
+      </option>
+      <option value="musik">
+        <label>Musik</label>
+      </option>
+      <option value="ortsansicht">
+        <label>Ortsansichten</label>
+      </option>
+      <option value="pharmazie">
+        <label>Pharmazie</label>
+      </option>
+      <option value="portraet">
+        <label>Porträts</label>
+      </option>
+      <option value="regentengeschichte">
+        <label>Regentengeschichte</label>
+      </option>
+      <option value="stefangeorge">
+        <label>Stefan George Archiv</label>
+      </option>
+      <option value="theaterzettel">
+        <label>Theaterzettel</label>
+      </option>
+      <option value="varia">
+        <label>Varia</label>
+      </option>
+      <option value="vd18">
+        <label>VD18-Drucke</label>
+      </option>
+      <option value="vd17">
+        <label>VD17-Drucke</label>
+      </option>
+      <option value="wuerttembergica">
+        <label>Württembergica</label>
+      </option>
+    </key>
+
+    <!-- Person -->
+    <key id="Person">
+      <label>Person</label>
+      <key id="RoleCode">
+        <!-- moegliche Codes:
+            https://opus.k10plus.de/frontdoor/deliver/index/docId/421/file/Liste_Beziehungskennzeichnungen_3010_3110.pdf
+            https://id.loc.gov/vocabulary/relators.html
+        -->
+        <label>Role</label>
+        <label lang="de">Rolle</label>
+        <option value="aut">
+          <label>Author</label>
+          <label lang="de">Verfasser</label>
+        </option>
+        <option value="hnr">
+          <label>Honoree</label>
+          <label lang="de">Gefeierte Person</label>
+        </option>
+        <option value="edt">
+          <label>Editor</label>
+          <label lang="de">Herausgeber</label>
+        </option>
+        <option value="oth">
+          <label>Other Person</label>
+          <label lang="de">Sonstige Person</label>
+        </option>
+        <option value="trl">
+          <label>Translator</label>
+          <label lang="de">Übersetzer</label>
+        </option>
+        <option value="crl">
+          <label>Creator</label>
+          <label lang="de">Ersteller (Creator)</label>
+        </option>
+        <option value="rcp">
+          <label>Recipient</label>
+          <label lang="de">Adressat</label>
+        </option>
+        <option value="dub">
+          <label>Dubious author</label>
+          <label lang="de">Angeblicher Verfasser</label>
+        </option>
+        <option value="ant">
+          <label>Bibliographic antecedent</label>
+          <label lang="de">Begründer</label>
+        </option>
+        <option value="ill">
+          <label>Illustrator</label>
+          <label lang="de">Illustrator</label>
+        </option>
+        <option value="cwt">
+          <label>Commentator</label>
+          <label lang="de">Kommentator</label>
+        </option>
+        <option value="cmp">
+          <label>Composer</label>
+          <label lang="de">Komponist</label>
+        </option>
+        <option value="atn">
+          <label>Attributed name</label>
+          <label lang="de">Mutmaßlicher Verfasser</label>
+        </option>
+        <option value="com">
+          <label>Compiler</label>
+          <label lang="de">Redakteur</label>
+        </option>
+        <option value="col">
+          <label>Collector</label>
+          <label lang="de">Sammler</label>
+        </option>
+        <option value="aui">
+          <label>Author of introduction</label>
+          <label lang="de">Vorredner</label>
+        </option>
+        <option value="art">
+          <label>Artist</label>
+          <label lang="de">Künstler</label>
+        </option>
+        <option value="prt">
+          <label>Printer</label>
+          <label lang="de">Drucker</label>
+        </option>
+        <option value="pbl">
+          <label>Verlag</label>
+          <label lang="de">Verlag</label>
+        </option>
+        <option value="wst">
+          <label>Writer of supplementary</label>
+          <label lang="de">Verfasser eines Postscriptums</label>
+        </option>
+        <option value="asn">
+          <label>Associated name</label>
+          <label lang="de">Sonstiger Name</label>
+        </option>
+        <option value="ctb">
+          <label>Contributor</label>
+          <label lang="de">Mitwirkender</label>
+        </option>
+        <option value="etr">
+          <label>Etcher</label>
+          <label lang="de">Radierer</label>
+        </option>
+        <option value="egr">
+          <label>Engraver</label>
+          <label lang="de">Stecher</label>
+        </option>
+        <option value="pht">
+          <label>Photographer</label>
+          <label lang="de">Fotograf</label>
+        </option>
+        <option value="ltg">
+          <label>Lithographer</label>
+          <label lang="de">Lithograf</label>
+        </option>
+        <option value="dte">
+          <label>Dedicatee</label>
+          <label lang="de">Widmungsempfänger</label>
+        </option>
+        <option value="rsp">
+          <label>Respondent</label>
+          <label lang="de">Respondent</label>
+        </option>
+        <option value="dto">
+          <label>Dedicator</label>
+          <label lang="de">Widmender</label>
+        </option>
+        <option value="pra">
+          <label>Praeses</label>
+          <label lang="de">Praeses</label>
+        </option>
+        <option value="win">
+          <label>Writer of introduction</label>
+          <label lang="de">Verfasser einer Einleitung</label>
+        </option>
+        <option value="ctg">
+          <label>Cartographer</label>
+          <label lang="de">Kartograf</label>
+        </option>
+        <option value="scl">
+          <label>Sculptor</label>
+          <label lang="de">Bildhauer</label>
+        </option>
+        <option value="wpr">
+          <label>Writer of preface</label>
+          <label lang="de">Verfasser eines Vorworts</label>
+        </option>
+        <option value="dst">
+          <label>Distributor</label>
+          <label lang="de">Vertrieb</label>
+        </option>
+        <option value="cns">
+          <label>Censor</label>
+          <label lang="de">Zensor</label>
+        </option>
+      </key>
+      <key id="RoleText">
+        <label>Relationship designation (text)</label>
+        <label lang="de">Beziehungskennzeichnung (Text)</label>
+      </key>
+      <key id="LastName" use="authorLastName">
+        <label>Surname</label>
+        <label lang="de">Nachname</label>
+      </key>
+      <key id="FirstName">
+        <label>First name</label>
+        <label lang="de">Vorname</label>
+      </key>
+      <key id="DisplayForm">
+        <label>Display name</label>
+        <label lang="de">Anzeigename</label>
+      </key>
+      <key id="PersonalName">
+        <label>Personal name</label>
+        <label lang="de">Persönlicher Name</label>
+      </key>
+      <key id="Count">
+        <label>Count</label>
+        <label lang="de">Zählung</label>
+      </key>
+      <key id="AdditionalMetadataPerson">
+        <label>Surname, genus name, territory, title</label>
+        <label lang="de">Beiname, Gattungsname, Territorium, Titulatur</label>
+      </key>
+      <key id="Authority">
+        <label>Authority</label>
+        <label lang="de">Quelle (Normdaten)</label>
+      </key>
+      <key id="IdentifierGND">
+        <label>Identifier (GND)</label>
+        <label lang="de">Identifier (GND)</label>
+      </key>
+      <key id="IdentifierGNDURI">
+        <label>GND-URI</label>
+        <label lang="de">GND-URI</label>
+      </key>
+      <key id="IdentifierPPN">
+        <label>Identifier (PPN)</label>
+        <label lang="de">Identifier (PPN)</label>
+      </key>
+      <!-- nur zusaetzlich fuer Bildung TSL_ATS benoetigt, damit Autor beruecksichtigt wird (Bug in Kitodo?) -->
+      <key id="Role">
+        <label>CreatorRole</label>
+        <label lang="de">CreatorRole</label>
+      </key>
+    </key>
+
+    <!-- normale Metadaten -->
+    <key id="AlternativeTitle">
+      <label>Alternative title</label>
+      <label lang="de">Alternativer Titel</label>
+    </key>
+    <key id="BibliographicIdentifier">
+      <label>Bibliographic Identifier</label>
+      <label lang="de">Bibliographische Quelle</label>
+    </key>
+    <key id="CatalogIDPeriodicalDB">
+      <label>PeriodicalDB-ID</label>
+      <label lang="de">ZDB-ID</label>
+    </key>
+    <key id="CatalogIDSource">
+      <label>PPN (of source)</label>
+      <label lang="de">PPN (Vorlage)</label>
+    </key>
+    <key id="ContainedWorkInfo">
+      <label>Contained</label>
+      <label lang="de">Enthalten</label>
+    </key>
+    <key id="ContainedWorkInfoPrefix">
+      <label>Contained (Prefix)</label>
+      <label lang="de">Enthalten (Vortext)</label>
+    </key>
+    <key id="CurrentNo">
+      <label>Item number</label>
+      <label lang="de">Bandnummer</label>
+    </key>
+    <key id="CurrentNoSorting" use="displaySummary">
+      <label>Sorting number</label>
+      <label lang="de">BandNr-Sortierung</label>
+    </key>
+    <key id="CustodialHistory">
+      <label>Custodial history</label>
+      <label lang="de">Provenienz</label>
+    </key>
+    <key id="CustodialHistoryInfo">
+      <label>Custodial history (+PPN)</label>
+      <label lang="de">Provenienz (+PPN)</label>
+    </key>
+    <key id="CustodialHistoryLeoBw">
+      <label>Custodial history (LEO-BW)</label>
+      <label lang="de">Provenienz (LEO-BW)</label>
+    </key>
+    <key id="datedigit">
+      <label>Date digitalization</label>
+      <label lang="de">Datum Digitalisierung</label>
+    </key>
+    <key id="DateOfPublication">
+      <label>Date of Publication</label>
+      <label lang="de">Erscheinungsdatum</label>
+    </key>
+    <key id="DocLanguage">
+      <label>Language</label>
+      <label lang="de">Sprache</label>
+    </key>
+    <key id="Edition">
+      <label>Edition</label>
+      <label lang="de">Ausgabebezeichnung</label>
+    </key>
+    <key id="EnclosedWorkInfo">
+      <label>Enclosed</label>
+      <label lang="de">Beigefügt</label>
+    </key>
+    <key id="Note">
+      <label>Note</label>
+      <label lang="de">Notiz</label>
+    </key>
+    <key id="NoteWithoutSubfields">
+      <label>Note without subfields</label>
+      <label lang="de">Fußnote unaufgegliedert</label>
+    </key>
+    <key id="PlaceOfPublication">
+      <label>Place of publication</label>
+      <label lang="de">Erscheinungsort</label>
+    </key>
+    <key id="PublicationEnd">
+      <label>Last year of publication</label>
+      <label lang="de">Letztes Erscheinungsjahr</label>
+    </key>
+    <key id="PublicationRun">
+      <label>Publication run</label>
+      <label lang="de">Erscheinungsverlauf</label>
+    </key>
+    <key id="PublicationRunCatalogue">
+      <label>Publication run</label>
+      <label lang="de">Erscheinungsverlauf (Katalog)</label>
+    </key>
+    <key id="PublicationStart">
+      <label>First year of publication</label>
+      <label lang="de">Erstes Erscheinungsjahr</label>
+    </key>
+    <key id="PublicationYear">
+      <label>Publication year</label>
+      <label lang="de">Erscheinungsjahr</label>
+    </key>
+    <key id="PublicationYearNonsort">
+      <label>Publication year (nonsort)</label>
+      <label lang="de">Erscheinungsjahr Vorlageform</label>
+    </key>
+    <key id="PublisherName">
+      <label>Publisher</label>
+      <label lang="de">Verleger</label>
+    </key>
+    <key id="Scale">
+      <label>Scale</label>
+      <label lang="de">Maßstab</label>
+    </key>
+    <key id="shelfmarksource">
+      <label>Shelfmark of source media</label>
+      <label lang="de">Signatur der Quelle</label>
+    </key>
+    <key id="SizeSourcePrint">
+      <label>Size of source</label>
+      <label lang="de">Größe der Vorlage</label>
+    </key>
+    <key id="SortingCounter">
+      <label>Sorting</label>
+      <label lang="de">Sortierzählung</label>
+    </key>
+    <key id="Subject">
+      <label>Subject</label>
+      <label lang="de">Thema</label>
+    </key>
+    <key id="SubjectLeoBw">
+      <label>Subject (LEO-BW)</label>
+      <label lang="de">Thema (LEO-BW)</label>
+    </key>
+    <key id="SwbCatalogIDDigital">
+      <label>SWB-PPN (obsolete)</label>
+      <label lang="de">SWB-PPN (digital; veraltet)</label>
+    </key>
+    <key id="SwbCatalogIDSource">
+      <label>SWB-PPN (of source; obsolete)</label>
+      <label lang="de">SWB-PPN (Vorlage; veraltet)</label>
+    </key>
+    <key id="TitleDocAdditional">
+      <label>Additional title</label>
+      <label lang="de">Nebentitel</label>
+    </key>
+    <key id="TitleDocMain" use="structureTreeTitle displaySummary">
+      <label>Main title</label>
+      <label lang="de">Haupttitel</label>
+    </key>
+    <key id="TitleDocMainNote">
+      <label>Title note</label>
+      <label lang="de">Anmerkung Titel</label>
+    </key>
+    <key id="TitleDocMainShort">
+      <label>Main title (sorting)</label>
+      <label lang="de">Haupttitel (Sortierung)</label>
+    </key>
+    <key id="TitleDocSub">
+      <label>Subtitle</label>
+      <label lang="de">Untertitel</label>
+    </key>
+    <key id="TitleDocVaryingForm">
+      <label>Varying form of title</label>
+      <label lang="de">Ansetzungssachtitel</label>
+    </key>
+    <key id="TitleWord">
+      <label>Title words</label>
+      <label lang="de">Zusätzliche Sucheinstiege</label>
+    </key>
+    <key id="TSL_ATS">
+      <label>TSL/ATS</label>
+    </key>
+    <key id="URL">
+      <label>URL (PURL)</label>
+      <label lang="de">URL (PURL)</label>
+    </key>
+    <key id="URN">
+      <label>URN</label>
+      <label lang="de">URN</label>
+    </key>
+    <key id="URNanchor">
+      <label>URN anchor</label>
+      <label lang="de">URN Überordnung</label>
+    </key>
+    <key id="NewspaperDay">
+      <label>Newspaper day</label>
+      <label lang="de">Zeitung Tag</label>
+    </key>
+    <key id="NewspaperIssue">
+      <label>Newspaper issue</label>
+      <label lang="de">Zeitung Ausgabe</label>
+    </key>
+    <key id="NewspaperMonth">
+      <label>Newspaper month</label>
+      <label lang="de">Zeitung Monat</label>
+    </key>
+    <key id="NewspaperYear">
+      <label>Newspaper year</label>
+      <label lang="de">Zeitung Jahr</label>
+    </key>
+  </declaration>
+
+  <!-- correlation -->
+  <correlation>
+    <!-- structMap@TYPE=PHYSICAL -->
+    <!-- Workaround fuer physSequence -->
+    <restriction division="" unspecified="forbidden">
+        <permit division="page"/>
+        <permit division="track"/>
+        <permit division="other"/>
+    </restriction>
+
+    <restriction division="page" unspecified="forbidden">
+         <permit key="ORDERLABEL" maxOccurs="1"/>
+    </restriction>
+
+    <!-- docType restrictions -->
+    <restriction division="Monograph" unspecified="forbidden">
+      <permit division="Chapter"/>
+      <permit division="Cover"/>
+      <permit division="Illustration"/>
+      <permit division="ImprintColophon"/>
+      <permit division="Index"/>
+      <permit division="Map"/>
+      <permit division="Music"/>
+      <permit division="TableList"/>
+      <permit division="TableOfContents"/>
+      <permit division="TextSection"/>
+      <permit division="TitlePage"/>
+      <permit division="annotation"/>
+      <permit division="additional"/>
+      <permit division="corrigenda"/>
+      <permit division="bookplate"/>
+      <permit division="paste_down"/>
+      <permit division="endsheet"/>
+      <permit division="preface"/>
+      <permit division="dedication"/>
+      <permit division="edge"/>
+      <permit division="fascicle"/>
+      <permit division="fragment"/>
+      <permit division="initial_decoration"/>
+      <permit division="spine"/>
+      <permit division="ContainedWork"/>
+      <permit key="singleDigCollection" minOccurs="1"/>
+      <permit key="AccessLicense" maxOccurs="1" minOccurs="1"/>
+      <permit key="TitleDocMain" maxOccurs="1" minOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1" minOccurs="1"/>
+      <permit key="TitleDocMainShort" maxOccurs="1"/>
+      <permit key="ORDERLABEL" maxOccurs="1"/>
+      <permit key="TitleDocSub" maxOccurs="1"/>
+      <permit key="AlternativeTitle"/>
+      <permit key="Person" unspecified="forbidden">
+        <permit key="LastName"/>
+        <permit key="FirstName"/>
+        <permit key="DisplayForm"/>
+        <permit key="PersonalName"/>
+        <permit key="Count"/>
+        <permit key="AdditionalMetadataPerson"/>
+        <permit key="RoleCode" minOccurs="1"/>
+        <permit key="RoleText"/>
+        <permit key="Authority"/>
+        <permit key="IdentifierGND"/>
+        <permit key="IdentifierGNDURI"/>
+        <permit key="IdentifierPPN"/>
+      </permit>
+      <permit key="SizeSourcePrint" maxOccurs="1"/>
+      <permit key="PublisherName"/>
+      <permit key="PlaceOfPublication"/>
+      <permit key="PublicationYear" maxOccurs="1"/>
+      <permit key="PublicationYearNonsort" maxOccurs="1"/>
+      <permit key="DateOfPublication" maxOccurs="1"/>
+      <permit key="DocLanguage"/>
+      <permit key="Note"/>
+      <permit key="CatalogIDDigital" maxOccurs="1" minOccurs="1"/>
+      <permit key="CatalogIDSource" maxOccurs="1"/>
+      <permit key="SwbCatalogIDDigital" maxOccurs="1"/>
+      <permit key="SwbCatalogIDSource" maxOccurs="1"/>
+      <permit key="shelfmarksource"/>
+      <permit key="URL" maxOccurs="1" minOccurs="1"/>
+      <permit key="URN" maxOccurs="1" minOccurs="1"/>
+      <permit key="TSL_ATS" maxOccurs="1" minOccurs="1"/>
+      <permit key="datedigit" maxOccurs="1"/>
+      <permit key="TitleWord" maxOccurs="1"/>
+      <permit key="TitleDocVaryingForm" maxOccurs="1"/>
+      <permit key="TitleDocAdditional"/>
+      <permit key="TitleDocMainNote"/>
+      <permit key="NoteWithoutSubfields"/>
+      <permit key="BibliographicIdentifier"/>
+      <permit key="CustodialHistory"/>
+      <permit key="CustodialHistoryInfo"/>
+      <permit key="CustodialHistoryLeoBw"/>
+      <permit key="Scale"/>
+      <permit key="ContainedWorkInfo"/>
+      <permit key="ContainedWorkInfoPrefix"/>
+      <permit key="EnclosedWorkInfo"/>
+      <permit key="SortingCounter" maxOccurs="1"/>
+      <permit key="Edition" maxOccurs="1"/>
+      <permit key="docType" maxOccurs="1"/>
+      <permit key="processTitle" maxOccurs="1"/>
+    </restriction>
+    <restriction division="MultiVolumeWork" unspecified="forbidden">
+      <permit division="Volume"/>
+      <permit key="singleDigCollection" minOccurs="1"/>
+      <permit key="AccessLicense" maxOccurs="1"/>
+      <permit key="TitleDocMain" maxOccurs="1" minOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1" minOccurs="1"/>
+      <permit key="TitleDocMainShort" maxOccurs="1"/>
+      <permit key="ORDERLABEL" maxOccurs="1"/>
+      <permit key="TitleDocSub" maxOccurs="1"/>
+      <permit key="AlternativeTitle"/>
+      <permit key="Person" unspecified="forbidden">
+        <permit key="LastName"/>
+        <permit key="FirstName"/>
+        <permit key="DisplayForm"/>
+        <permit key="PersonalName"/>
+        <permit key="Count"/>
+        <permit key="AdditionalMetadataPerson"/>
+        <permit key="RoleCode" minOccurs="1"/>
+        <permit key="RoleText"/>
+        <permit key="Authority"/>
+        <permit key="IdentifierGND"/>
+        <permit key="IdentifierGNDURI"/>
+        <permit key="IdentifierPPN"/>
+      </permit>
+      <permit key="SizeSourcePrint" maxOccurs="1"/>
+      <permit key="PublisherName"/>
+      <permit key="PlaceOfPublication"/>
+      <permit key="PublicationYear" maxOccurs="1"/>
+      <permit key="PublicationYearNonsort" maxOccurs="1"/>
+      <permit key="DateOfPublication" maxOccurs="1"/>
+      <permit key="DocLanguage"/>
+      <permit key="Note"/>
+      <permit key="CatalogIDDigital" maxOccurs="1" minOccurs="1"/>
+      <permit key="CatalogIDSource" maxOccurs="1"/>
+      <permit key="SwbCatalogIDDigital" maxOccurs="1"/>
+      <permit key="SwbCatalogIDSource" maxOccurs="1"/>
+      <permit key="shelfmarksource"/>
+      <permit key="URL" maxOccurs="1" minOccurs="1"/>
+      <permit key="URN" maxOccurs="1" minOccurs="1"/>
+      <permit key="TSL_ATS" maxOccurs="1" minOccurs="1"/>
+      <permit key="datedigit" maxOccurs="1"/>
+      <permit key="TitleWord" maxOccurs="1"/>
+      <permit key="TitleDocVaryingForm" maxOccurs="1"/>
+      <permit key="TitleDocAdditional"/>
+      <permit key="TitleDocMainNote"/>
+      <permit key="NoteWithoutSubfields"/>
+      <permit key="BibliographicIdentifier"/>
+      <permit key="CustodialHistory"/>
+      <permit key="CustodialHistoryInfo"/>
+      <permit key="CustodialHistoryLeoBw"/>
+      <permit key="Scale"/>
+      <permit key="SortingCounter" maxOccurs="1"/>
+      <permit key="Edition" maxOccurs="1"/>
+      <permit key="docType" maxOccurs="1"/>
+      <permit key="processTitle" maxOccurs="1"/>
+    </restriction>
+    <restriction division="Volume" unspecified="forbidden">
+      <permit division="Chapter"/>
+      <permit division="Cover"/>
+      <permit division="Illustration"/>
+      <permit division="ImprintColophon"/>
+      <permit division="Index"/>
+      <permit division="Map"/>
+      <permit division="Music"/>
+      <permit division="TableList"/>
+      <permit division="TableOfContents"/>
+      <permit division="TextSection"/>
+      <permit division="TitlePage"/>
+      <permit division="annotation"/>
+      <permit division="additional"/>
+      <permit division="corrigenda"/>
+      <permit division="bookplate"/>
+      <permit division="paste_down"/>
+      <permit division="endsheet"/>
+      <permit division="preface"/>
+      <permit division="dedication"/>
+      <permit division="edge"/>
+      <permit division="fascicle"/>
+      <permit division="fragment"/>
+      <permit division="initial_decoration"/>
+      <permit division="spine"/>
+      <permit division="ContainedWork"/>
+      <permit key="singleDigCollection" minOccurs="1"/>
+      <permit key="AccessLicense" maxOccurs="1" minOccurs="1"/>
+      <permit key="TitleDocMain" maxOccurs="1" minOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1" minOccurs="1"/>
+      <permit key="TitleDocMainShort" maxOccurs="1"/>
+      <permit key="ORDERLABEL" maxOccurs="1"/>
+      <permit key="TitleDocSub" maxOccurs="1"/>
+      <permit key="AlternativeTitle"/>
+      <permit key="CurrentNo"/>
+      <permit key="CurrentNoSorting"/>
+      <permit key="Person" unspecified="forbidden">
+        <permit key="LastName"/>
+        <permit key="FirstName"/>
+        <permit key="DisplayForm"/>
+        <permit key="PersonalName"/>
+        <permit key="Count"/>
+        <permit key="AdditionalMetadataPerson"/>
+        <permit key="RoleCode" minOccurs="1"/>
+        <permit key="RoleText"/>
+        <permit key="Authority"/>
+        <permit key="IdentifierGND"/>
+        <permit key="IdentifierGNDURI"/>
+        <permit key="IdentifierPPN"/>
+      </permit>
+      <permit key="SizeSourcePrint" maxOccurs="1"/>
+      <permit key="PublisherName"/>
+      <permit key="PlaceOfPublication"/>
+      <permit key="PublicationYear" maxOccurs="1"/>
+      <permit key="PublicationYearNonsort" maxOccurs="1"/>
+      <permit key="DateOfPublication" maxOccurs="1"/>
+      <permit key="DocLanguage"/>
+      <permit key="Note"/>
+      <permit key="CatalogIDDigital" maxOccurs="1" minOccurs="1"/>
+      <permit key="CatalogIDDigitalAnchor" maxOccurs="1" minOccurs="1"/>
+      <permit key="CatalogIDSource" maxOccurs="1"/>
+      <permit key="SwbCatalogIDDigital" maxOccurs="1"/>
+      <permit key="SwbCatalogIDSource" maxOccurs="1"/>
+      <permit key="shelfmarksource"/>
+      <permit key="URL" maxOccurs="1" minOccurs="1"/>
+      <permit key="URN" maxOccurs="1" minOccurs="1"/>
+      <permit key="TSL_ATS" maxOccurs="1" minOccurs="1"/>
+      <permit key="datedigit" maxOccurs="1"/>
+      <permit key="TitleWord" maxOccurs="1"/>
+      <permit key="TitleDocVaryingForm" maxOccurs="1"/>
+      <permit key="TitleDocAdditional"/>
+      <permit key="TitleDocMainNote"/>
+      <permit key="NoteWithoutSubfields"/>
+      <permit key="BibliographicIdentifier"/>
+      <permit key="CustodialHistory"/>
+      <permit key="CustodialHistoryInfo"/>
+      <permit key="CustodialHistoryLeoBw"/>
+      <permit key="Scale"/>
+      <permit key="ContainedWorkInfo"/>
+      <permit key="ContainedWorkInfoPrefix"/>
+      <permit key="EnclosedWorkInfo"/>
+      <permit key="SortingCounter" maxOccurs="1"/>
+      <permit key="Edition" maxOccurs="1"/>
+      <permit key="docType" maxOccurs="1"/>
+      <permit key="processTitle" maxOccurs="1"/>
+    </restriction>
+    <restriction division="Periodical" unspecified="forbidden">
+      <permit division="PeriodicalVolume"/>
+      <permit key="singleDigCollection" minOccurs="1"/>
+      <permit key="AccessLicense" maxOccurs="1"/>
+      <permit key="TitleDocMain" maxOccurs="1" minOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1" minOccurs="1"/>
+      <permit key="TitleDocMainShort" maxOccurs="1"/>
+      <permit key="ORDERLABEL" maxOccurs="1"/>
+      <permit key="TitleDocSub" maxOccurs="1"/>
+      <permit key="AlternativeTitle"/>
+      <permit key="Person" unspecified="forbidden">
+        <permit key="LastName"/>
+        <permit key="FirstName"/>
+        <permit key="DisplayForm"/>
+        <permit key="PersonalName"/>
+        <permit key="Count"/>
+        <permit key="AdditionalMetadataPerson"/>
+        <permit key="RoleCode" minOccurs="1"/>
+        <permit key="RoleText"/>
+        <permit key="Authority"/>
+        <permit key="IdentifierGND"/>
+        <permit key="IdentifierGNDURI"/>
+        <permit key="IdentifierPPN"/>
+      </permit>
+      <permit key="SizeSourcePrint" maxOccurs="1"/>
+      <permit key="PublisherName"/>
+      <permit key="PlaceOfPublication"/>
+      <permit key="PublicationRunCatalogue" maxOccurs="1"/>
+      <permit key="PublicationYear" maxOccurs="1"/>
+      <permit key="PublicationYearNonsort" maxOccurs="1"/>
+      <permit key="DateOfPublication" maxOccurs="1"/>
+      <permit key="DocLanguage"/>
+      <permit key="Note"/>
+      <permit key="CatalogIDDigital" maxOccurs="1" minOccurs="1"/>
+      <permit key="CatalogIDSource" maxOccurs="1"/>
+      <permit key="SwbCatalogIDDigital" maxOccurs="1"/>
+      <permit key="SwbCatalogIDSource" maxOccurs="1"/>
+      <permit key="shelfmarksource"/>
+      <permit key="URL" maxOccurs="1" minOccurs="1"/>
+      <permit key="URN" maxOccurs="1" minOccurs="1"/>
+      <permit key="CatalogIDPeriodicalDB" maxOccurs="1"/>
+      <permit key="TSL_ATS" maxOccurs="1" minOccurs="1"/>
+      <permit key="datedigit" maxOccurs="1"/>
+      <permit key="TitleWord" maxOccurs="1"/>
+      <permit key="TitleDocVaryingForm" maxOccurs="1"/>
+      <permit key="TitleDocAdditional"/>
+      <permit key="TitleDocMainNote"/>
+      <permit key="NoteWithoutSubfields"/>
+      <permit key="BibliographicIdentifier"/>
+      <permit key="CustodialHistory"/>
+      <permit key="CustodialHistoryInfo"/>
+      <permit key="CustodialHistoryLeoBw"/>
+      <permit key="Scale"/>
+      <permit key="SortingCounter" maxOccurs="1"/>
+      <permit key="Edition" maxOccurs="1"/>
+      <permit key="docType" maxOccurs="1"/>
+      <permit key="processTitle" maxOccurs="1"/>
+    </restriction>
+    <restriction division="PeriodicalVolume" unspecified="forbidden">
+      <permit division="Chapter"/>
+      <permit division="Cover"/>
+      <permit division="Illustration"/>
+      <permit division="ImprintColophon"/>
+      <permit division="Index"/>
+      <permit division="Map"/>
+      <permit division="Music"/>
+      <permit division="TableList"/>
+      <permit division="TableOfContents"/>
+      <permit division="TextSection"/>
+      <permit division="TitlePage"/>
+      <permit division="annotation"/>
+      <permit division="additional"/>
+      <permit division="corrigenda"/>
+      <permit division="bookplate"/>
+      <permit division="paste_down"/>
+      <permit division="endsheet"/>
+      <permit division="preface"/>
+      <permit division="dedication"/>
+      <permit division="edge"/>
+      <permit division="fascicle"/>
+      <permit division="fragment"/>
+      <permit division="initial_decoration"/>
+      <permit division="spine"/>
+      <permit division="ContainedWork"/>
+      <permit division="PeriodicalIssue"/>
+      <permit key="singleDigCollection" minOccurs="1"/>
+      <permit key="AccessLicense" maxOccurs="1" minOccurs="1"/>
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+      <permit key="TitleDocMainShort" maxOccurs="1"/>
+      <permit key="ORDERLABEL" maxOccurs="1"/>
+      <permit key="TitleDocSub" maxOccurs="1"/>
+      <permit key="AlternativeTitle"/>
+      <permit key="CurrentNo" maxOccurs="1" minOccurs="1"/>
+      <permit key="CurrentNoSorting" maxOccurs="1" minOccurs="1"/>
+      <permit key="Person" unspecified="forbidden">
+        <permit key="LastName"/>
+        <permit key="FirstName"/>
+        <permit key="DisplayForm"/>
+        <permit key="PersonalName"/>
+        <permit key="Count"/>
+        <permit key="AdditionalMetadataPerson"/>
+        <permit key="RoleCode" minOccurs="1"/>
+        <permit key="RoleText"/>
+        <permit key="Authority"/>
+        <permit key="IdentifierGND"/>
+        <permit key="IdentifierGNDURI"/>
+        <permit key="IdentifierPPN"/>
+      </permit>
+      <permit key="SizeSourcePrint" maxOccurs="1"/>
+      <permit key="PublisherName"/>
+      <permit key="PlaceOfPublication"/>
+      <permit key="PublicationYear" maxOccurs="1"/>
+      <permit key="PublicationYearNonsort" maxOccurs="1"/>
+      <permit key="DateOfPublication" maxOccurs="1"/>
+      <permit key="DocLanguage"/>
+      <permit key="Note"/>
+      <permit key="CatalogIDDigital" maxOccurs="1"/>
+      <permit key="CatalogIDDigitalAnchor" maxOccurs="1" minOccurs="1"/>
+      <permit key="CatalogIDSource" maxOccurs="1"/>
+      <permit key="SwbCatalogIDDigital" maxOccurs="1"/>
+      <permit key="SwbCatalogIDSource" maxOccurs="1"/>
+      <permit key="shelfmarksource"/>
+      <permit key="URL" maxOccurs="1" minOccurs="1"/>
+      <permit key="URN" maxOccurs="1" minOccurs="1"/>
+      <permit key="TSL_ATS" maxOccurs="1" minOccurs="1"/>
+      <permit key="datedigit" maxOccurs="1"/>
+      <permit key="TitleWord" maxOccurs="1"/>
+      <permit key="TitleDocVaryingForm" maxOccurs="1"/>
+      <permit key="TitleDocAdditional"/>
+      <permit key="TitleDocMainNote"/>
+      <permit key="NoteWithoutSubfields"/>
+      <permit key="BibliographicIdentifier"/>
+      <permit key="CustodialHistory"/>
+      <permit key="CustodialHistoryInfo"/>
+      <permit key="CustodialHistoryLeoBw"/>
+      <permit key="Scale"/>
+      <permit key="ContainedWorkInfo"/>
+      <permit key="ContainedWorkInfoPrefix"/>
+      <permit key="EnclosedWorkInfo"/>
+      <permit key="SortingCounter" maxOccurs="1"/>
+      <permit key="Edition" maxOccurs="1"/>
+      <permit key="docType" maxOccurs="1"/>
+      <permit key="processTitle" maxOccurs="1"/>
+    </restriction>
+    <restriction division="Newspaper" unspecified="forbidden">
+      <permit division="NewspaperYear"/>
+      <permit key="singleDigCollection" minOccurs="1"/>
+      <permit key="AccessLicense" maxOccurs="1"/>
+      <permit key="TitleDocMain" maxOccurs="1" minOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+      <permit key="TitleDocMainShort" maxOccurs="1"/>
+      <permit key="ORDERLABEL" maxOccurs="1"/>
+      <permit key="TitleDocSub" maxOccurs="1"/>
+      <permit key="AlternativeTitle"/>
+      <permit key="Person" unspecified="forbidden">
+        <permit key="LastName"/>
+        <permit key="FirstName"/>
+        <permit key="DisplayForm"/>
+        <permit key="PersonalName"/>
+        <permit key="Count"/>
+        <permit key="AdditionalMetadataPerson"/>
+        <permit key="RoleCode" minOccurs="1"/>
+        <permit key="RoleText"/>
+        <permit key="Authority"/>
+        <permit key="IdentifierGND"/>
+        <permit key="IdentifierGNDURI"/>
+        <permit key="IdentifierPPN"/>
+      </permit>
+      <permit key="SizeSourcePrint" maxOccurs="1"/>
+      <permit key="PublisherName"/>
+      <permit key="PlaceOfPublication"/>
+      <permit key="PublicationYear" maxOccurs="1"/>
+      <permit key="PublicationYearNonsort" maxOccurs="1"/>
+      <permit key="PublicationRunCatalogue" maxOccurs="1"/>
+      <permit key="DocLanguage"/>
+      <permit key="Note"/>
+      <permit key="CatalogIDDigital" maxOccurs="1" minOccurs="1"/>
+      <permit key="CatalogIDSource" maxOccurs="1"/>
+      <permit key="SwbCatalogIDDigital" maxOccurs="1"/>
+      <permit key="SwbCatalogIDSource" maxOccurs="1"/>
+      <permit key="shelfmarksource"/>
+      <permit key="URL" maxOccurs="1" minOccurs="1"/>
+      <permit key="URN" maxOccurs="1" minOccurs="1"/>
+      <permit key="CatalogIDPeriodicalDB" maxOccurs="1" minOccurs="1"/>
+      <permit key="TSL_ATS" maxOccurs="1"/>
+      <permit key="datedigit" maxOccurs="1"/>
+      <permit key="TitleWord" maxOccurs="1"/>
+      <permit key="TitleDocVaryingForm" maxOccurs="1"/>
+      <permit key="TitleDocAdditional"/>
+      <permit key="TitleDocMainNote"/>
+      <permit key="NoteWithoutSubfields"/>
+      <permit key="BibliographicIdentifier"/>
+      <permit key="CustodialHistory"/>
+      <permit key="CustodialHistoryInfo"/>
+      <permit key="CustodialHistoryLeoBw"/>
+      <permit key="Scale"/>
+      <permit key="ContainedWorkInfo"/>
+      <permit key="ContainedWorkInfoPrefix"/>
+      <permit key="EnclosedWorkInfo"/>
+      <permit key="SortingCounter" maxOccurs="1"/>
+      <permit key="Edition" maxOccurs="1"/>
+      <permit key="docType" maxOccurs="1"/>
+      <permit key="processTitle" maxOccurs="1"/>
+    </restriction>
+    <restriction division="NewspaperYear" unspecified="forbidden">
+      <permit division="NewspaperMonth"/>
+      <permit key="docType" maxOccurs="1"/>
+      <permit key="processTitle" maxOccurs="1"/>
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+      <permit key="ORDERLABEL" maxOccurs="1"/>
+      <permit key="TitleDocMainShort" maxOccurs="1"/>
+      <permit key="CatalogIDDigital" maxOccurs="1"/>
+      <permit key="URL" maxOccurs="1"/>
+      <permit key="URN" maxOccurs="1"/>
+    </restriction>
+    <restriction division="NewspaperMonth" unspecified="forbidden">
+      <permit division="NewspaperDay"/>
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+      <permit key="ORDERLABEL" maxOccurs="1"/>
+      <permit key="TitleDocMainShort" maxOccurs="1"/>
+    </restriction>
+    <restriction division="NewspaperDay" unspecified="forbidden">
+      <permit division="NewspaperIssue"/>
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+      <permit key="ORDERLABEL" maxOccurs="1"/>
+      <permit key="TitleDocMainShort" maxOccurs="1"/>
+    </restriction>
+    <restriction division="NewspaperIssue" unspecified="forbidden">
+      <permit key="singleDigCollection"/>
+      <permit key="AccessLicense" maxOccurs="1"/>
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+      <permit key="TitleDocMainShort" maxOccurs="1"/>
+      <permit key="ORDERLABEL" maxOccurs="1"/>
+      <permit key="DateOfPublication" maxOccurs="1"/>
+      <permit key="URL" maxOccurs="1"/>
+      <permit key="URN" maxOccurs="1"/>
+      <permit key="CurrentNo" maxOccurs="1"/>
+      <permit key="PublicationYear" maxOccurs="1"/>
+      <permit key="PublicationYearNonsort" maxOccurs="1"/>
+      <permit key="MetsPointerURL" maxOccurs="1"/>
+      <permit key="Newspaper" maxOccurs="1"/>
+      <permit key="NewspaperYear" maxOccurs="1"/>
+      <permit key="NewspaperMonth" maxOccurs="1"/>
+      <permit key="NewspaperDay" maxOccurs="1"/>
+      <permit key="NewspaperIssue" maxOccurs="1"/>
+      <permit key="CatalogIDDigital" maxOccurs="1"/>
+      <permit key="docType" maxOccurs="1"/>
+      <permit key="processTitle" maxOccurs="1"/>
+    </restriction>
+
+    <!-- Strukturdaten -->
+    <restriction division="additional" unspecified="forbidden">
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="annotation" unspecified="forbidden">
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="bookplate" unspecified="forbidden">
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="Chapter" unspecified="forbidden">
+      <permit division="Chapter"/>
+      <permit division="Cover"/>
+      <permit division="Illustration"/>
+      <permit division="TextSection"/>
+      <permit division="TitlePage"/>
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="corrigenda" unspecified="forbidden">
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="Cover" unspecified="forbidden">
+      <permit division="Cover"/>
+      <permit division="TextSection"/>
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="dedication" unspecified="forbidden">
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="edge" unspecified="forbidden">
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="endsheet" unspecified="forbidden">
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="fascicle" unspecified="forbidden">
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="fragment" unspecified="forbidden">
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="Illustration" unspecified="forbidden">
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="ImprintColophon" unspecified="forbidden">
+      <permit division="Illustration"/>
+      <permit division="TextSection"/>
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="Index" unspecified="forbidden">
+      <permit division="Illustration"/>
+      <permit division="Index"/>
+      <permit division="TextSection"/>
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="initial_decoration" unspecified="forbidden">
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="Map" unspecified="forbidden">
+      <permit division="TextSection"/>
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="Music" unspecified="forbidden">
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="paste_down" unspecified="forbidden">
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="preface" unspecified="forbidden">
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="spine" unspecified="forbidden">
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="TableList" unspecified="forbidden">
+      <permit division="Illustration"/>
+      <permit division="Index"/>
+      <permit division="Music"/>
+      <permit division="TableList"/>
+      <permit division="TableOfContents"/>
+      <permit division="TextSection"/>
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="TableOfContents" unspecified="forbidden">
+      <permit division="TableList"/>
+      <permit division="TableOfContents"/>
+      <permit division="TextSection"/>
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="TextSection" unspecified="forbidden">
+      <permit division="Chapter"/>
+      <permit division="Cover"/>
+      <permit division="Illustration"/>
+      <permit division="TextSection"/>
+      <permit division="TitlePage"/>
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="TitlePage" unspecified="forbidden">
+      <permit division="Illustration"/>
+      <permit division="TableOfContents"/>
+      <permit division="TextSection"/>
+      <permit division="TitlePage"/>
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="ContainedWork" unspecified="forbidden">
+      <permit division="Chapter"/>
+      <permit division="Cover"/>
+      <permit division="Illustration"/>
+      <permit division="ImprintColophon"/>
+      <permit division="Index"/>
+      <permit division="Map"/>
+      <permit division="Music"/>
+      <permit division="TableList"/>
+      <permit division="TableOfContents"/>
+      <permit division="TextSection"/>
+      <permit division="TitlePage"/>
+      <permit division="annotation"/>
+      <permit division="additional"/>
+      <permit division="corrigenda"/>
+      <permit division="bookplate"/>
+      <permit division="paste_down"/>
+      <permit division="endsheet"/>
+      <permit division="preface"/>
+      <permit division="dedication"/>
+      <permit division="edge"/>
+      <permit division="fascicle"/>
+      <permit division="fragment"/>
+      <permit division="initial_decoration"/>
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+      <permit key="TitleDocMainShort" maxOccurs="1"/>
+      <permit key="ORDERLABEL" maxOccurs="1"/>
+    </restriction>
+    <restriction division="PeriodicalIssue" unspecified="forbidden">
+      <permit division="Chapter"/>
+      <permit division="Cover"/>
+      <permit division="Illustration"/>
+      <permit division="ImprintColophon"/>
+      <permit division="Index"/>
+      <permit division="Map"/>
+      <permit division="Music"/>
+      <permit division="TableList"/>
+      <permit division="TableOfContents"/>
+      <permit division="TextSection"/>
+      <permit division="TitlePage"/>
+      <permit division="annotation"/>
+      <permit division="additional"/>
+      <permit division="corrigenda"/>
+      <permit division="bookplate"/>
+      <permit division="paste_down"/>
+      <permit division="endsheet"/>
+      <permit division="preface"/>
+      <permit division="dedication"/>
+      <permit division="edge"/>
+      <permit division="fascicle"/>
+      <permit division="fragment"/>
+      <permit division="initial_decoration"/>
+      <permit division="spine"/>
+      <permit division="ContainedWork"/>
+      <permit division="PeriodicalIssue"/>
+      <permit key="TitleDocMain" maxOccurs="1"/>
+      <permit key="LABEL" maxOccurs="1"/>
+    </restriction>
+  </correlation>
+
+  <!-- editing -->
+  <editing>
+    <setting key="AccessLicense" multiline="true"/>
+    <setting key="AlternativeTitle"/>
+    <setting key="BibliographicIdentifier"/>
+    <setting key="CatalogIDDigital"/>
+    <setting key="CatalogIDPeriodicalDB"/>
+    <setting key="CatalogIDSource"/>
+    <setting key="ContainedWorkInfo"/>
+    <setting key="ContainedWorkInfoPrefix"/>
+    <setting key="CurrentNo"/>
+    <setting key="CurrentNoSorting"/>
+    <setting key="CustodialHistory"/>
+    <setting key="CustodialHistoryInfo"/>
+    <setting key="CustodialHistoryLeoBw"/>
+    <setting key="datedigit"/>
+    <setting key="DateOfPublication"/>
+    <setting key="DocLanguage"/>
+    <setting key="Edition"/>
+    <setting key="EnclosedWorkInfo"/>
+    <setting key="LABEL"/>
+    <setting key="Note"/>
+    <setting key="NoteWithoutSubfields"/>
+    <setting key="ORDERLABEL"/>
+    <setting key="Person"/>
+    <setting key="PlaceOfPublication"/>
+    <setting key="PublicationEnd"/>
+    <setting key="PublicationRun"/>
+    <setting key="PublicationRunCatalogue"/>
+    <setting key="PublicationStart"/>
+    <setting key="PublicationYear"/>
+    <setting key="PublicationYearNonsort"/>
+    <setting key="PublisherName"/>
+    <setting key="Scale"/>
+    <setting key="shelfmarksource" alwaysShowing="true"/>
+    <setting key="singleDigCollection"/>
+    <setting key="SizeSourcePrint"/>
+    <setting key="SortingCounter"/>
+    <setting key="Subject"/>
+    <setting key="SubjectLeoBw"/>
+    <setting key="SwbCatalogIDDigital"/>
+    <setting key="SwbCatalogIDSource"/>
+    <setting key="TitleDocAdditional"/>
+    <setting key="TitleDocMain" alwaysShowing="true"/>
+    <setting key="TitleDocMainNote"/>
+    <setting key="TitleDocMainShort"/>
+    <setting key="TitleDocSub"/>
+    <setting key="TitleDocVaryingForm"/>
+    <setting key="TitleWord"/>
+    <setting key="TSL_ATS"/>
+    <setting key="URL"/>
+    <setting key="URN"/>
+    <acquisitionStage name="create">
+      <setting excluded="false" key="AlternativeTitle"/>
+      <setting excluded="false" key="BibliographicIdentifier"/>
+      <setting excluded="false" key="CatalogIDPeriodicalDB"/>
+      <setting excluded="false" key="CatalogIDSource"/>
+      <setting excluded="false" key="ContainedWorkInfo"/>
+      <setting excluded="false" key="ContainedWorkInfoPrefix"/>
+      <setting excluded="false" key="CustodialHistory"/>
+      <setting excluded="false" key="CustodialHistoryInfo"/>
+      <setting excluded="false" key="CustodialHistoryLeoBw"/>
+      <setting excluded="false" key="datedigit"/>
+      <setting excluded="false" key="DateOfPublication"/>
+      <setting excluded="false" key="Edition"/>
+      <setting excluded="false" key="EnclosedWorkInfo"/>
+      <setting excluded="false" key="LABEL" alwaysShowing="true"/>
+      <setting excluded="false" key="Note"/>
+      <setting excluded="false" key="NoteWithoutSubfields"/>
+      <setting excluded="false" key="ORDERLABEL" alwaysShowing="true"/>
+      <setting excluded="false" key="Person"/>
+      <setting excluded="false" key="PublicationEnd"/>
+      <setting excluded="false" key="PublicationRun"/>
+      <setting excluded="false" key="PublicationStart"/>
+      <setting excluded="false" key="Scale"/>
+      <setting excluded="false" key="singleDigCollection"/>
+      <setting excluded="false" key="SizeSourcePrint"/>
+      <setting excluded="false" key="SortingCounter"/>
+      <setting excluded="false" key="Subject"/>
+      <setting excluded="false" key="SubjectLeoBw"/>
+      <setting excluded="false" key="SwbCatalogIDDigital"/>
+      <setting excluded="false" key="SwbCatalogIDSource"/>
+      <setting excluded="false" key="TitleDocAdditional"/>
+      <setting excluded="false" key="TitleDocMainNote"/>
+      <setting excluded="false" key="TitleDocMainShort" alwaysShowing="true"/>
+      <setting excluded="false" key="TitleDocVaryingForm"/>
+      <setting excluded="false" key="TitleWord"/>
+      <setting excluded="false" key="TSL_ATS" alwaysShowing="true"/>
+    </acquisitionStage>
+  </editing>
+</ruleset>
