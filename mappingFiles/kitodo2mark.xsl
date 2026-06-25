@@ -100,6 +100,8 @@
         <xsl:variable name="p4950" select="normalize-space(//kitodo:metadata[@name='4950'])"/>
 
         <!-- TODO: 5580: Schlagworte -->
+        <!-- 5519: Veranstaltungsplakat -->
+        <xsl:variable name="p5519" select="normalize-space(//kitodo:metadata[@name='5519'])"/>
 
         <!-- 7100 Bibliothekssiegel und Fernleihcode -->
         <xsl:variable name="p7100" select="normalize-space(//kitodo:metadata[@name='7100'])"/>
@@ -554,6 +556,15 @@
                         </xsl:if>
                     </datafield>
                 </xsl:for-each>
+
+                <!-- 650: Veranstaltungsplakat -->
+                <xsl:if test="$p5519">
+                    <datafield tag="650" ind1=" " ind2="7">
+                        <subfield code="0">(DE-588)4125453-3</subfield>
+                        <subfield code="2">gnd</subfield>
+                        <subfield code="a">Veranstaltung</subfield>
+                    </datafield>
+                </xsl:if>
 
                 <!-- 655: Inhalt -->
                 <xsl:if test="$p1131">
