@@ -558,7 +558,7 @@
                 </xsl:for-each>
 
                 <!-- 650: Veranstaltungsplakat -->
-                <xsl:if test="$p5519">
+                <xsl:if test="$p5519='true'">
                     <datafield tag="650" ind1=" " ind2="7">
                         <subfield code="0">(DE-588)4125453-3</subfield>
                         <subfield code="2">gnd</subfield>
